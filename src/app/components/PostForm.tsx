@@ -15,8 +15,6 @@ export default function PostForm() {
         if(result.message !== 'Success') toast.error('Something went wrong creating the url'); return
         console.log(result.url);
         
-    
-        return
     }
 
   return (
