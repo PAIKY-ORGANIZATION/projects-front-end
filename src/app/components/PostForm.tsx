@@ -1,6 +1,7 @@
 'use client'
 
 import { getSignerURL } from '@/actions/get-signed-url'
+import axios from 'axios'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -12,9 +13,19 @@ export default function PostForm() {
     const handleSubmit = async()=>{
     
         const result = await getSignerURL()
-        if(result.message !== 'Success') toast.error('Something went wrong creating the url'); return
-        console.log(result.url);
+        if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
         
+        const url = result.url
+
+        const res = await axios.put(url, image, {
+            headers: {
+                "Content-Type": image?.type || "application/octet-stream"
+            }
+        })
+
+
+        toast.success('Image uploaded successfully!')
+
     }
 
   return (
