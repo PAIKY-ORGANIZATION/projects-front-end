@@ -25,7 +25,10 @@ export default function PostForm() {
             if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
             
             const url = result.url
-    
+
+            console.log({url});
+            
+
             await axios.put(url, image, {
                 headers: {
                     "Content-Type": image?.type || "application/octet-stream"
@@ -43,6 +46,7 @@ export default function PostForm() {
 
   return (
     <>
+        <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs>
         <div className='flex items-center justify-around w-full  max-w-xl'>
             <h1 className="text-3xl font-bold text-center"> AWS S3 Upload Demo</h1>    
             <Image src="/s3.svg" alt="Logo" width={100} height={100}></Image>
@@ -79,7 +83,6 @@ export default function PostForm() {
         <ColorButton color="blue" width="fit"> 
             <Link href={'/aws-s3-app/posts'}> Go see your posts</Link>
         </ColorButton>
-        <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs>
     </>
   )
 }
