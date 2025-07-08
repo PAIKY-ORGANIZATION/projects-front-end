@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import ProfilePicture from './ProfilePicture';
+import ColorButton from './Button';
+import Link from 'next/link';
 //prettier-ignore
 export default function PostForm() {
     const [content, setContent] = useState('')
@@ -45,33 +47,37 @@ export default function PostForm() {
             <Image src="/s3.svg" alt="Logo" width={100} height={100}></Image>
         </div>
 
-        <div className="max-w-xl w-full mx-auto mt-10 border border-gray-300 rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around ">
+        <div className="max-w-xl w-full mx-auto mt-10  rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around bg-[#2a2a2a]">
                 {image && (
                     <img src={URL.createObjectURL(image)} alt="Preview" className="rounded-lg max-h-60 object-contain" />
                 )}
             <div className="flex items-start space-x-4">
                 <ProfilePicture></ProfilePicture>
                 <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="What's on your mind?" rows={3}
-                className="w-full resize-none border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full resize-none border border-gray-300 rounded-md p-2 text-sm bg-[#414141] text-white"
                 />
             </div>
+            <div className="flex flex-col  gap-2 w-[80%] items-center mx-auto">
+                <input id="fileInput" type="file" accept="image/*" className="hidden"
+                    onChange={(e) => {
+                        const file = e.target.files?.[0]
+                        if (file) setImage(file)
+                    }}
+                />
+                
+                {/* //* I know you would normally use a label with "htmlFor=''" but I do this in order to re-use the ColorButton. */}
+                <ColorButton color="blue" width="full" type="button" onClick={() => document.getElementById('fileInput')?.click()} >
+                    Select Image
+                </ColorButton>
 
-            <input id="fileInput" type="file" accept="image/*" className="hidden"
-                onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) setImage(file)
-                }}
-            />
-            <label htmlFor="fileInput"
-                className="inline-block px-4 py-2  bg-[#13ae8a] border border-gray-300 rounded-md text-center font-bold text-sm cursor-pointer hover:bg-[#68b5a3]"
-            > 
-                Select Image
-            </label>
-
-            <button type="button" className="w-full bg-blue-600 text-white py-2 rounded-md font-bold text-sm hover:bg-blue-700" onClick={handleSubmit} >
-                Post
-            </button>
+                <ColorButton color="green" width="full" onClick={handleSubmit}> Post </ColorButton>
+            
+            </div>
         </div>
+
+        <ColorButton color="blue" width="fit"> 
+            <Link href={'/posts'}> Go see your posts</Link>
+        </ColorButton>
     </>
   )
 }

@@ -33,8 +33,9 @@ export default function  NavBarTop() {
                 <Link href={'/create-pair'}> Create Pair</Link>
             </div>
             <div className="flex-[2] flex">
-                <input className="border border-[#273343] w-full rounded-[6px] h-[30px] bg-[#162138]"
-                onChange={(e)=>{setTerm(e.target.value)}} onKeyDown={handleSearch}/>
+                <input
+                className="w-full h-[30px] rounded-md border border-white/30 bg-white/20 text-white placeholder-white/60 px-3 focus:outline-none focus:ring-2 focus:ring-white/50" type="text" placeholder="Search" onChange={(e) => setTerm(e.target.value)} onKeyDown={handleSearch} 
+                />
             </div>
             <div className=" flex-[1] flex justify-between px-10 py-2 items-center ">
                 <ProfilePicture></ProfilePicture>
