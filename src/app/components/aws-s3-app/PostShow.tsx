@@ -7,10 +7,10 @@ import Image from 'next/image';
 import ColorButton from '../Button';
 
 type Post = {
-	id: string;
-	imageUrl?: string;
-	content: string;
-	createdAt: string;
+	// id: string;
+	objectURL?: string;
+	// content: string;
+	// createdAt: string;
 };
 
 interface PostsPageProps {
@@ -33,18 +33,18 @@ export default function PostsPage({ posts }: PostsPageProps) {
 			) : (
 				<div className="space-y-4">
 					{posts.map((post) => (
-						<div key={post.id} className="bg-[#1c1c1c] p-4 rounded-xl space-y-3" >
+						<div key={post.objectURL} className="bg-[#1c1c1c] p-4 rounded-xl space-y-3" >
 							<div className="flex justify-between items-center">
-								<span className="text-xs text-gray-400"> {new Date( post.createdAt ).toLocaleString()} </span>
+								<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
 								<ColorButton color="red" width="fit" onClick={() => onDeletePost() }> Delete </ColorButton>
 							</div>
 
-							{post.imageUrl && (
-								<Image src={post.imageUrl} alt="Post image" width={600} height={400} className="w-full rounded-md object-contain" />
+							{post.objectURL && (
+								<Image src={post.objectURL} alt="Post image" width={600} height={400} className="w-full rounded-md object-contain" />
 							)}
 
 							<p className="text-white text-sm">
-								{post.content}
+								{'Test content'}
 							</p>
 						</div>
 					))}

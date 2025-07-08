@@ -43,13 +43,15 @@ const _getObjectPublicURL = (object: _Object)=>{
 
 
 
-const getAllPosts = async()=>{
+export const getAllPosts = async()=>{
 
     const contents = await _listObjectsContents()
 
     if(!contents){return []}
 
-    const urls =  contents.map((object)=> _getObjectPublicURL(object))
+    const urls =  contents.map((object)=> {
+        return {objectURL: _getObjectPublicURL(object)}
+    })
 
     return urls
 

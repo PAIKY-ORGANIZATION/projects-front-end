@@ -21,6 +21,6 @@ export default async function Posts() {
 
 
     return (
-        <PostsPage posts={[testPost]}></PostsPage>
+        <PostsPage posts={posts}></PostsPage>
     )
 }
