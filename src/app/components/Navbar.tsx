@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import ProfilePicture from "./ProfilePicture";
 
 export default function  NavBarTop() {
 
@@ -35,10 +36,9 @@ export default function  NavBarTop() {
                 <input className="border border-[#273343] w-full rounded-[6px] h-[30px] bg-[#162138]"
                 onChange={(e)=>{setTerm(e.target.value)}} onKeyDown={handleSearch}/>
             </div>
-            <div className=" flex-[1] flex justify-end px-10 py-2 items-center ">
-                <button className="h-10 hover:cursor-pointer hover:underline color bg-[#162138] px-4  rounded-3xl">
-                    {'lol'}
-                </button>
+            <div className=" flex-[1] flex justify-between px-10 py-2 items-center ">
+                <ProfilePicture></ProfilePicture>
+                <p className="font-"> Logged as  Miguel</p>
             </div>
         </div>
     )
