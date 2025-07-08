@@ -6,9 +6,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import ProfilePicture from './ProfilePicture';
-import ColorButton from './Button';
+import ProfilePicture from '../ProfilePicture';
+import ColorButton from '../Button';
 import Link from 'next/link';
+import ReadDocs from '../ReadDocs';
 //prettier-ignore
 export default function PostForm() {
     const [content, setContent] = useState('')
@@ -47,7 +48,7 @@ export default function PostForm() {
             <Image src="/s3.svg" alt="Logo" width={100} height={100}></Image>
         </div>
 
-        <div className="max-w-xl w-full mx-auto mt-10  rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around bg-[#2a2a2a]">
+        <div className="max-w-xl w-full mx-auto   rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around bg-[#1c1c1c]">
                 {image && (
                     <img src={URL.createObjectURL(image)} alt="Preview" className="rounded-lg max-h-60 object-contain" />
                 )}
@@ -76,8 +77,9 @@ export default function PostForm() {
         </div>
 
         <ColorButton color="blue" width="fit"> 
-            <Link href={'/posts'}> Go see your posts</Link>
+            <Link href={'/aws-s3-app/posts'}> Go see your posts</Link>
         </ColorButton>
+        <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs>
     </>
   )
 }
