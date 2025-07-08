@@ -1,30 +1,41 @@
 'use client'
 
 import { getSignerURL } from '@/actions/get-signed-url'
+import { computeSHA256 } from '@/utils/compute-checksum'
 import axios from 'axios'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function PostForm() {
   const [content, setContent] = useState('')
-  const [image, setImage] = useState<File | null>(null)
+    const [image, setImage] = useState<File | null>(null)
+
 
 
     const handleSubmit = async()=>{
+        try{
+            if(!image){toast.error('Please select an image'); return}
+            
+            const checkSum = await computeSHA256(image) //$ This is optional and guarantees that the image has keeps its integrity
+            
+            const result = await getSignerURL(image.type, image.size + 1, checkSum, content)
+            if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
+            
+            const url = result.url
     
-        const result = await getSignerURL()
-        if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
-        
-        const url = result.url
-
-        const res = await axios.put(url, image, {
-            headers: {
-                "Content-Type": image?.type || "application/octet-stream"
-            }
-        })
-
-
-        toast.success('Image uploaded successfully!')
+            await axios.put(url, image, {
+                headers: {
+                    "Content-Type": image?.type || "application/octet-stream"
+                }
+            })
+    
+    
+            toast.success('Image uploaded successfully!')
+            
+        }catch(e){
+            toast.error('⚠️ CHECK CONSOLE ⚠️'  + e)
+            console.log(e);	
+        }
 
     }
 
