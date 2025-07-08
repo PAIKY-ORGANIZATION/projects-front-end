@@ -1,0 +1,9 @@
+import {createClient} from 'redis'
+
+
+const redisClient = new createClient({
+    socket: {
+        host: process.env.,
+        port: proccess.env.,
+    }
+})
