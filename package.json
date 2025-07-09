@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev_local": "next dev",
+    "dev_docker_local": "ENVIRONMENT=docker_local next dev",
+    "dev_docker_compose": "ENVIRONMENT=docker_compose next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -1,0 +1,14 @@
+services:
+  next-app:
+    ports:
+      - "3005:3000"
+    volumes:
+      - "./src:/app/src"
+    build: .
+    # env_file:
+      # - config/local.env
+    networks:
+      - default
+      - paikynet
+    command: "npm run dev_docker_local"
+    
