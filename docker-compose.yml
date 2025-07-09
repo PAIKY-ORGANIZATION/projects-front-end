@@ -14,4 +14,4 @@ services:
   #! Read Readme.md > Question
   redis:
     image: busybox
-    command: sh -c "echo 'redis placeholder'; sleep infinity"
+    command: sh -c "echo 'Redis running as  placeholder!'; sleep infinity"
