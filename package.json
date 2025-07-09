@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev_local": "next dev",
-    "dev_docker_local": "ENVIRONMENT=docker_local next dev",
-    "dev_docker_compose": "ENVIRONMENT=docker_compose next dev",
+    "dev_docker_network": "ENVIRONMENT=docker_network next dev",
+    "dev_docker_full": "ENVIRONMENT=docker_full next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
