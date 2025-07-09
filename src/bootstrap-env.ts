@@ -4,7 +4,7 @@
 
 import dotenv from 'dotenv';
 
-// dotenv.config({ path: `config/${process.env.ETH_NETWORK}.env` }); //* Defined in npm script
+dotenv.config({ path: `config/${process.env.ENVIRONMENT}.env` }); //* Defined in npm script
 
 dotenv.config({path: 'config/shared.env'}) 
 

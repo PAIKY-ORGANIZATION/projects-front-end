@@ -5,7 +5,7 @@ import PostsPage from "@/app/components/aws-s3-app/PostShow";
 
 //¡ TEST
 import { redisClient } from "@/lib/redis-client";
-redisClient
+await redisClient.set('lol', 'lol')
 
 
 

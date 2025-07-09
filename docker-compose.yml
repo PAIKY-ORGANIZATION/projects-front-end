@@ -12,3 +12,7 @@ services:
       - paikynet
     command: "npm run dev_docker_local"
     
+networks:
+  default:
+  paikynet:
+    external: true
