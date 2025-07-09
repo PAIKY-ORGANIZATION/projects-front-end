@@ -5,7 +5,6 @@ services:
     volumes:
       - "./src:/app/src"
     build: .
-
     # env_file:
       #$ this is already getting picked when I run the npm script 
       # - config/local.env 
