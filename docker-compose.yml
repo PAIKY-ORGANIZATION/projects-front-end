@@ -11,7 +11,7 @@ services:
 
 
 
-  #¡ This is a test. NEED TO EXPLAIN WHY
+  #! Read Readme.md > Question
   redis:
     image: busybox
     command: sh -c "echo 'redis placeholder'; sleep infinity"
