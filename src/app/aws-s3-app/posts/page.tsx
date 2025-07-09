@@ -9,6 +9,11 @@ await redisClient.set('lol', 'lol')
 
 
 
+console.log(await redisClient.get('lol'));
+
+
+
+
 export default async function Posts() {
 
 
