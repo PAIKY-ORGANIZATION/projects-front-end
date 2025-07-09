@@ -10,4 +10,4 @@ services:
       # - config/local.env 
     
   redis:
-    
+    image: redis/redis-stack:latest
