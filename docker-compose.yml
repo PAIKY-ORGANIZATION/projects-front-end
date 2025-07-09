@@ -34,6 +34,6 @@ services:
 
   #! Read Readme.md > Question
   redis:
-    image: redis/redis-stack:latest
+    image: redis/redis-stack-server:latest
     ports:
       - "6370:6379" #! Since 6379 will likely be occupied in AWS as the bridge-network-level Redis instance I just added +1 to 6379
