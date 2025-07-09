@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev_local": " ENVIRONMENT=local next dev ",
+    "dev_local": " ENVIRONMENT=local next dev",
     "dev_docker_network": "ENVIRONMENT=docker_network next dev",
     "dev_docker_full": "ENVIRONMENT=docker_full next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start ",
     "lint": "next lint"
   },
   "dependencies": {

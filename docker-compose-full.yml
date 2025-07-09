@@ -1,9 +1,10 @@
-services:
-    redis:
-      ports:
-        - "6370:6379" #! Since 6379 will likely be occupied in AWS as the bridge-network-level Redis instance I just added +1 to 6379
-    next-app:
-      depends_on:
-        - redis
-      command: "npm run dev_docker_full"
+# services:
+#     redis:
+#       image: redis/redis-stack:latest
+#       ports:
+#         - "6370:6379" #! Since 6379 will likely be occupied in AWS as the bridge-network-level Redis instance I just added +1 to 6379
+#     next-app:
+#       depends_on:
+#         - redis
+#       command: "npm run dev_docker_full"
 

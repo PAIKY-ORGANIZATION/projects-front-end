@@ -1,3 +1,23 @@
+# services:
+#   next-app:
+#     ports:
+#       - "3005:3000"
+#     volumes:
+#       - "./src:/app/src"
+#     build: .
+#     # env_file:
+#       #$ this is already getting picked when I run the npm script 
+#       # - config/local.env 
+
+
+
+#   #! Read Readme.md > Question
+#   redis:
+#     image: busybox
+#     command: sh -c "echo 'Redis running as  placeholder!'; sleep infinity"
+
+
+
 services:
   next-app:
     ports:
@@ -8,10 +28,12 @@ services:
     # env_file:
       #$ this is already getting picked when I run the npm script 
       # - config/local.env 
+    command: sh -c "npm run build && npm run start"
 
 
 
   #! Read Readme.md > Question
   redis:
-    image: busybox
-    command: sh -c "echo 'Redis running as  placeholder!'; sleep infinity"
+    image: redis/redis-stack:latest
+    ports:
+      - "6370:6379" #! Since 6379 will likely be occupied in AWS as the bridge-network-level Redis instance I just added +1 to 6379
