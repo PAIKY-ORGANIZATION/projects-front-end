@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev_local": " ENVIRONMENT=local next dev",
-    "dev_docker_network": "ENVIRONMENT=docker_network next dev",
-    "dev_docker_full": "ENVIRONMENT=docker_full next dev",
+    "dev_docker": "ENVIRONMENT=docker_aws next dev",
     "build": "next build",
-    "start": "next start ",
+    "start": "next start ENVIRONMENT=docker_aws",
     "lint": "next lint"
   },
   "dependencies": {

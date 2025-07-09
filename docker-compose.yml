@@ -36,4 +36,4 @@ services:
   redis:
     image: redis/redis-stack-server:latest
     ports:
-      - "6370:6379" #! Since 6379 will likely be occupied in AWS as the bridge-network-level Redis instance I just added +1 to 6379
+      - "63792:6379" #! Since there will be more apps with redis, I added a last digit that will increase based on the age of the app.
