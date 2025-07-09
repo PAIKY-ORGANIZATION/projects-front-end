@@ -1,6 +1,14 @@
 import { getAllPosts } from "@/actions/get-all-posts";
 import PostsPage from "@/app/components/aws-s3-app/PostShow";
 
+
+
+//¡ TEST
+import { redisClient } from "@/lib/redis-client";
+redisClient
+
+
+
 export default async function Posts() {
 
 

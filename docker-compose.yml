@@ -7,7 +7,7 @@ services:
     build: .
     # env_file:
       # - config/local.env
-    networks:
+    networks: #! This is assuming you are running a Redis instance and setting that Redis instance to run in a custom network called paikynet.
       - default
       - paikynet
     command: "npm run dev_docker_local"

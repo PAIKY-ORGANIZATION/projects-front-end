@@ -1,9 +1,17 @@
 import {createClient} from 'redis'
 
 
-const redisClient = new createClient({
+export const redisClient = createClient({
     socket: {
-        host: process.env.REDIS_HOST,
-        port: proccess.env.,
+        host: process.env.REDIS_HOST!,
+        port: Number(process.env.REDIS_PORT!),
     }
 })
+
+
+try{
+    await redisClient.connect()
+}catch(e){
+    console.error('Error connecting to redis:');
+    console.error(e);	
+}
