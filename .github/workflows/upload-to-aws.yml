@@ -47,7 +47,7 @@ jobs:
             echo "AWS_BUCKET_REGION=us-east-2" >> ./config/shared.env #$ This is NOT private but still the shared.env file doesn't get uploaded
             echo "AWS_BUCKET_NAME=next-app-public-bucket" >> ./config/shared.env #$ Same here
 
-            # sudo docker compose down --remove-orphans --wait
+            sudo docker compose down --remove-orphans --wait
             sudo docker compose -f docker-compose.yml -f docker-compose-full.yml  up --build -d
 
 
