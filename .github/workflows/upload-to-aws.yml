@@ -26,8 +26,11 @@ jobs:
             UNIQUE_APP_NAME="${{ secrets.UNIQUE_APP_NAME }}"  #! UNIQUE_APP_NAME must be all lowercase and without underscores for Docker to accept it.
             #! UNIQUE_APP_NAME must be set per-repository
             #! If you are using Docker COMPOSE,  you don't need a unique app name for the image name. However, you still need a unique directory name.
-            REPO_PATH="${{ github.repository }}"  #$ Example: # gives "dev-miguel/repo-name". We will use this to clone the repo initially. 
+            REPO_PATH="${{ github.repository }}"  #$ Example: # gives "dev-miguel/repo-name". We will use this to clone the repo initially 
             DOCKER_PORT="${{ secrets.DOCKER_PORTS }}"  #! I know it's not being used here
+
+
+
 
             cd ~/vsCodeMain
             #* If the is no desired-folder with .git, it means the repo doesn't exist so we clone it INTO A DESIRED FOLDER NAME.
@@ -38,4 +41,10 @@ jobs:
             git merge origin/master
 
 
-            echo "PORT=3000" >> ./config/
+            echo "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" >> ./config/shared.env
+            echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> ./config/shared.env"
+
+
+
+
+            
