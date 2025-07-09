@@ -8,3 +8,6 @@ services:
     # env_file:
       #$ this is already getting picked when I run the npm script 
       # - config/local.env 
+    
+  redis:
+    image: redis/redis-stack:latest
