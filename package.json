@@ -6,7 +6,7 @@
     "dev_local": " ENVIRONMENT=local next dev",
     "dev_docker": "ENVIRONMENT=docker_aws next dev",
     "build": "next build",
-    "start": "next start ENVIRONMENT=docker_aws",
+    "start": "ENVIRONMENT=docker_aws next start ",
     "lint": "next lint"
   },
   "dependencies": {
