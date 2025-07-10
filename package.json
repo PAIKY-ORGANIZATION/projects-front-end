@@ -5,7 +5,7 @@
   "scripts": {
     "dev_local": " ENVIRONMENT=local next dev",
     "dev_docker": "ENVIRONMENT=docker_aws next dev",
-    "build": "next build",
+    "build": "ENVIRONMENT=docker_aws next build",
     "start": "ENVIRONMENT=docker_aws next start ",
     "lint": "next lint"
   },

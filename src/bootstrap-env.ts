@@ -13,7 +13,9 @@ const requiredVars = [
     "AWS_BUCKET_REGION",
     "AWS_ACCESS_KEY",
     "AWS_BUCKET_NAME",
-    "AWS_SECRET_ACCESS_KEY"
+    "AWS_SECRET_ACCESS_KEY",
+    "REDIS_HOST",
+    "REDIS_PORT",
 ];
 
 requiredVars.forEach((varName) => {
