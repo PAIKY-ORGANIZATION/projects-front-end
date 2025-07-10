@@ -1,0 +1,37 @@
+# services:
+#   next-app:
+#     ports:
+#       - "3005:3000"
+#     volumes:
+#       - "./src:/app/src"
+#     build: .
+#     # env_file:
+#       #$ this is already getting picked when I run the npm script 
+#       # - config/local.env 
+
+
+
+#   #! Read Readme.md > Question
+#   redis:
+#     image: busybox
+#     command: sh -c "echo 'Redis running as  placeholder!'; sleep infinity"
+
+
+
+services:
+  next-app:
+    ports:
+      - "9999:3000"
+    volumes:
+      - "./src:/app/src"
+    build: .
+    # env_file:
+      #$ this is already getting picked when I run the npm script 
+      # - config/local.env 
+    command: sh -c "npm run build && npm run start"
+
+  #! Read Readme.md > Question
+  redis:
+    image: redis/redis-stack-server:latest
+    ports:
+      - "9998:6379" #! Since there will be more apps with redis, I added a last digit that will increase based on the age of the app.
