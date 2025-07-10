@@ -30,8 +30,6 @@ services:
       # - config/local.env 
     command: sh -c "npm run build && npm run start"
 
-
-
   #! Read Readme.md > Question
   redis:
     image: redis/redis-stack-server:latest
