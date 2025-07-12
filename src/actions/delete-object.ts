@@ -16,7 +16,7 @@ export const deleteObject = async(key: string)=>{
 
     const command = new DeleteObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME!,
-        Key: 'random'
+        Key: key
     })
 
 

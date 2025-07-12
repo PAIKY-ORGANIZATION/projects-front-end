@@ -15,10 +15,10 @@ export const uuidCookie = async(): Promise<string>=>{
 
     //* If it is the first time the client sends a request, set a unique UUID as a cookie.
     if(!cookieUUID){
-        const randomUUID = crypto.randomUUID()
+        cookieUUID = crypto.randomUUID()
 
-        cookieStore.set('RATE_LIMIT_COOKIE', randomUUID, { httpOnly: true, })
+        cookieStore.set('RATE_LIMIT_COOKIE', cookieUUID, { httpOnly: true, })
     }
 
-    return cookieUUID as string
+    return cookieUUID
 }
