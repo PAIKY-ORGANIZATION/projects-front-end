@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ProfilePicture from "./ProfilePicture";
-import ReadDocs from "./ReadDocs";
+
 
 export default function  NavBarTop() {
 
@@ -26,7 +26,6 @@ export default function  NavBarTop() {
 
     return (
         <div className="flex  items-center bg-[#161616] w-full">
-            <ReadDocs href={'/docs'}></ReadDocs>
             <div className="flex justify-around items-center flex-[4]">
                 <Link href={'/'} className="hover:underline font-bold"> Back to portfolio </Link>
                 <Link href={'/transact'} className="hover:underline font-bold"> Other projects</Link>

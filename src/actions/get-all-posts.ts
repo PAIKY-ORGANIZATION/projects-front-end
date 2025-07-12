@@ -7,7 +7,7 @@ import { ListObjectsCommand, ListObjectsCommandOutput, _Object } from "@aws-sdk/
 
 
 
-//* "Contents" will be an array like this:
+//* "objects" will be an array like this:
 //  [
 //     {
 //         "Key": "1c94e143-de48-4bc0-b629-63e53c5fcf83",
@@ -31,8 +31,8 @@ const _listObjectsContents = async()=>{
     const command = new ListObjectsCommand({
         Bucket: process.env.AWS_BUCKET_NAME
     })
-    const {Contents} =   await s3Client.send(command) as ListObjectsCommandOutput
-    return Contents as _Object[] | undefined
+    const {Contents: objects} =   await s3Client.send(command) as ListObjectsCommandOutput
+    return objects as _Object[] | undefined
 }
 
 
@@ -45,12 +45,12 @@ const _getObjectPublicURL = (object: _Object)=>{
 
 export const getAllPosts = async()=>{
 
-    const contents = await _listObjectsContents()
+    const objects = await _listObjectsContents()
 
-    if(!contents){return []}
+    if(!objects){return []}
 
-    const urls =  contents.map((object)=> {
-        return {objectURL: _getObjectPublicURL(object)}
+    const urls =  objects.map((object)=> {
+        return {objectURL: _getObjectPublicURL(object), key: object.Key!} //* the key is to delete the file, the url is to show the file
     })
 
     return urls
