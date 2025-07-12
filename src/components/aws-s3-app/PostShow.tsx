@@ -8,6 +8,7 @@ import ColorButton from '../Button';
 import ReadDocs from '../ReadDocs';
 import { deleteObject } from '@/actions/delete-object';
 import Link from 'next/link';
+import ProfilePicture from '../ProfilePicture';
 
 type Post = {
 	// id: string;
@@ -36,7 +37,6 @@ export default function PostsPage({ posts }: PostsPageProps) {
 
 	return (
 		<div className="max-w-[40%] mx-auto p-4 space-y-6">
-            <ReadDocs href={'/docs'}></ReadDocs>
 			<h1 className="text-3xl font-bold text-center">Your Posts</h1>
 
 			{posts.length === 0 ? (
@@ -46,7 +46,10 @@ export default function PostsPage({ posts }: PostsPageProps) {
 					{posts.map((post) => (
 						<div key={post.objectURL} className="bg-[#1c1c1c] p-4 rounded-xl space-y-3" >
 							<div className="flex justify-between items-center">
-								<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
+								<div className='flex items-center'>
+									<ProfilePicture></ProfilePicture>
+									<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
+								</div>
 								<ColorButton color="red" width="fit" onClick={() => onDeletePost(post.key) }> Delete </ColorButton>
 							</div>
 
@@ -61,9 +64,6 @@ export default function PostsPage({ posts }: PostsPageProps) {
 					))}
 				</div>
 			)}
-			<Link href={'/aws-s3-app/upload'}>
-    	        <ColorButton color="blue" width="fit"> Create a post </ColorButton>
-	        </Link>
 		</div>
 	);
 }

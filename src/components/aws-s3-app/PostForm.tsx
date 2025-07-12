@@ -8,16 +8,19 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import ProfilePicture from '../ProfilePicture';
 import ColorButton from '../Button';
-import Link from 'next/link';
-import ReadDocs from '../ReadDocs';
+import { useRouter } from 'next/navigation';
 //prettier-ignore
 export default function PostForm() {
     const [content, setContent] = useState('')
     const [image, setImage] = useState<File | null>(null)
+    const router = useRouter()
 
     const handleSubmit = async()=>{
+        
+        if(!image){toast.error('Please select an image'); return}
+        const uploadToastId = toast.loading('Uploading...') //* We dismiss this and remove it from the screen once there's a response from trying to upload the image.
+         
         try{
-            if(!image){toast.error('Please select an image'); return}
             
             const checkSum = await computeSHA256(image) //$ This is optional and guarantees that the image has keeps its integrity
             
@@ -35,7 +38,16 @@ export default function PostForm() {
                 }
             })
     
-            toast.success('Image uploaded successfully!')
+            toast.success((t) => (
+                <div onClick={() => {toast.dismiss(t.id); router.push('/aws-s3-app/posts'); }}
+                className="cursor-pointer flex items-center space-x-2" >
+                    <span>Success!</span>
+                    <span className="underline">Go see your posts</span>
+                </div>
+            ), {
+                duration: 4000,
+                icon: '🎉',
+            });
             
         }catch(e){
             toast.error('⚠️ CHECK CONSOLE ⚠️'  + e)
@@ -80,9 +92,6 @@ export default function PostForm() {
             </div>
         </div>
 
-        <Link href={'/aws-s3-app/posts'}>
-            <ColorButton color="blue" width="fit">  Go see your posts </ColorButton>
-        </Link>
     </>
   )
 }

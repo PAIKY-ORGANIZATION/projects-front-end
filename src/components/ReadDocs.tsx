@@ -12,9 +12,9 @@ type Props = {
 
 export default function ReadDocs({ href, color = 'orange' }: Props) {
   return (
-    <div className="absolute top-30 left-30 z-50">
+    <div className="">
       <ColorButton color={color} width="fit" className='flex gap-2 items-center'>
-        <Link href={href}>Read Documentation</Link>
+        <Link href={href} rel="noopener noreferrer" target="_blank">Read Documentation</Link>
         <FaNewspaper />
       </ColorButton>
     </div>
