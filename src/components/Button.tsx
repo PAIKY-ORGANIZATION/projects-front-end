@@ -13,7 +13,7 @@ const COLOR_CLASSES: Record<ButtonColor, string> = {
   red:   'bg-red-500 hover:bg-red-700',
   green: 'bg-[#13ae8a] hover:bg-[#68b5a3]',
   blue:  'bg-blue-500 hover:bg-blue-700',
-  orange: 'bg-orange-400 hover:bg-orange-700',
+  orange: 'bg-orange-400 hover:bg-orange-500',
 };
 
 const WIDTH_CLASSES: Record<Widths, string> = {

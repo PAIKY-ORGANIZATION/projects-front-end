@@ -46,7 +46,7 @@ export default function PostForm() {
 
   return (
     <>
-        <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs>
+        {/* <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs> */}
         <div className='flex items-center justify-around w-full  max-w-xl'>
             <h1 className="text-3xl font-bold text-center"> AWS S3 Upload Demo</h1>    
             <Image src="/s3.svg" alt="Logo" width={100} height={100}></Image>
@@ -80,9 +80,9 @@ export default function PostForm() {
             </div>
         </div>
 
-        <ColorButton color="blue" width="fit"> 
-            <Link href={'/aws-s3-app/posts'}> Go see your posts</Link>
-        </ColorButton>
+        <Link href={'/aws-s3-app/posts'}>
+            <ColorButton color="blue" width="fit">  Go see your posts </ColorButton>
+        </Link>
     </>
   )
 }

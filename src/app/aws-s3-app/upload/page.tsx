@@ -1,4 +1,4 @@
-import PostForm from "../../components/aws-s3-app/PostForm";
+import PostForm from "../../../components/aws-s3-app/PostForm";
 
 export default function Page() {
   return (

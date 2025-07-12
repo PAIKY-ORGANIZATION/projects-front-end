@@ -7,6 +7,7 @@ import Image from 'next/image';
 import ColorButton from '../Button';
 import ReadDocs from '../ReadDocs';
 import { deleteObject } from '@/actions/delete-object';
+import Link from 'next/link';
 
 type Post = {
 	// id: string;
@@ -60,6 +61,9 @@ export default function PostsPage({ posts }: PostsPageProps) {
 					))}
 				</div>
 			)}
+			<Link href={'/aws-s3-app/upload'}>
+    	        <ColorButton color="blue" width="fit"> Create a post </ColorButton>
+	        </Link>
 		</div>
 	);
 }
