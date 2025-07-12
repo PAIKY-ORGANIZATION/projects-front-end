@@ -1,24 +1,22 @@
-import { cookies, headers } from "next/headers"
+import { headers } from "next/headers"
+import {isRateLimited} from 'redis-rate-limiter-express'
+import { redisClient } from "./redis-client";
+import { RedisClientType } from "redis";
+import { uuidCookie } from "@/utils/uuid-cookie";
 
 
-
+//? Hopefully I can get the unique user identifier to be emails instead of IP addresses.
 export const runRateLimiterCheck = async(): Promise<boolean>=> {
 
-    const cookieStore = await cookies()
+    const headersStore = await headers();
 
-    const rateLimitCookie = cookieStore.get('RATE_LIMIT_COOKIE')
+    const ip =
+        headersStore.get('ip') || //* This is passed from middleware
+        await uuidCookie()
 
-    const hdrs = await headers();
-
-    const ip = hdrs.get('ip')
-
-    if(!ip) throw new Error('No IP FOUND')
-
-    //? Hopefully I can get the cookie to handle emails instead of IP addresses.
-    if(!rateLimitCookie) {
-        cookieStore.set('RATE_LIMIT_COOKIE', ip, { httpOnly: true, })
-    }
-
-    return true
-    
+    return isRateLimited(redisClient as RedisClientType, {
+        requestLimit: 3,
+        windowSizeSecs: 10,
+        uniqueUserIdentifier: ip,
+    })
 }
