@@ -40,7 +40,6 @@ jobs:
             git fetch
             git merge origin/master
 
-
             echo "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" >> ./config/shared.env #$ will create shared.env automatically as long as the ./config directory already exists.
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./config/shared.env
             echo "UNIQUE_APP_NAME=${{ secrets.UNIQUE_APP_NAME }}" >> ./config/shared.env
