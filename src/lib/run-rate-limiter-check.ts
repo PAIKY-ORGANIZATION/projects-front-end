@@ -1,4 +1,7 @@
 import { cookies, headers } from "next/headers"
+import fs from 'fs'
+
+
 
 export const runRateLimiterCheck = async(): Promise<boolean>=> {
 
@@ -22,6 +25,10 @@ export const runRateLimiterCheck = async(): Promise<boolean>=> {
             httpOnly: true,
         })
     }
+
+
+    //* logging the IP address in a file:
+    fs.appendFileSync('ip-addresses.txt', `${ip}\n`)
 
     return true
     
