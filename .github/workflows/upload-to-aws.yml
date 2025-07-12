@@ -29,7 +29,9 @@ jobs:
             REPO_PATH="${{ github.repository }}"  #$ Example: # gives "dev-miguel/repo-name". We will use this to clone the repo initially 
             DOCKER_PORT="${{ secrets.DOCKER_PORTS }}"  #! I know it's not being used here
 
-
+            echo "REPO_PATH: $REPO_PATH" #¡ Test
+            echo "UNIQUE_APP_NAME: $UNIQUE_APP_NAME"
+            echo "DOCKER_PORT: $DOCKER_PORT"
 
             cd ~/vsCodeMain
             #* If the is no desired-folder with .git, it means the repo doesn't exist so we clone it INTO A DESIRED FOLDER NAME.
