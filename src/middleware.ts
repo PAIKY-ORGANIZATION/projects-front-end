@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 export const middleware = async (req: NextRequest)=>{
 
-    // @ts-ignore // ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
+    // @ts-expect-error // ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
     const ip = req.ip || req.headers.get('x-forwarded-for')?.split(',')[0] || '';
 
     const final = NextResponse.next()

@@ -10,8 +10,10 @@ import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 export const deleteObject = async(key: string)=>{
     
     const isLimited = runRateLimiterCheck()
-    isLimited  //¡
-    key //¡
+
+    console.log(isLimited);
+    console.log(key);
+    
 
     const command = new DeleteObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME!,
