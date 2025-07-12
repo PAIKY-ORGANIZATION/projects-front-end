@@ -9,10 +9,9 @@ import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 
 export const deleteObject = async(key: string)=>{
     
-    const isLimited = runRateLimiterCheck()
+    const isLimited = await runRateLimiterCheck()
 
-    console.log(isLimited);
-    console.log(key);
+    console.log({isLimited});
     
 
     const command = new DeleteObjectCommand({
@@ -21,7 +20,7 @@ export const deleteObject = async(key: string)=>{
     })
 
 
-    //? Some error handling would not hurt.
+    // //? Some error handling would not hurt.
     const result = await s3Client.send(command)
 
     

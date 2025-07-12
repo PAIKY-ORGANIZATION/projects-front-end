@@ -10,13 +10,13 @@ export const runRateLimiterCheck = async(): Promise<boolean>=> {
 
     const headersStore = await headers();
 
-    const ip =
+    const uniqueUserIdentifier =
         headersStore.get('ip') || //* This is passed from middleware
         await uuidCookie()
 
     return isRateLimited(redisClient as RedisClientType, {
         requestLimit: 3,
         windowSizeSecs: 10,
-        uniqueUserIdentifier: ip,
+        uniqueUserIdentifier,
     })
 }
