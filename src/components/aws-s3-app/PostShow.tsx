@@ -9,13 +9,11 @@ import ProfilePicture from '../ProfilePicture';
 import toast from 'react-hot-toast';
 
 type Post = {
-	// id: string;
 	objectURL: string;
 	key: string
 
 	metadata: ImageMetadata
-	// content: string;
-	// createdAt: string;
+	time: Date
 };
 
 interface PostsPageProps {
@@ -58,7 +56,7 @@ export default function PostsPage({ posts }: PostsPageProps) {
 								<div className='flex items-center gap-2'>
 									<ProfilePicture></ProfilePicture>
 									<p className="font-bold">You -</p>
-									<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
+									<span className="text-xs text-gray-400"> {post.time.toLocaleString()} </span>
 								</div>
 
 								{/* //* ==================  Three dots menu ================ */}

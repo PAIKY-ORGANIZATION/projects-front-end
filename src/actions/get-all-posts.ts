@@ -52,9 +52,6 @@ const _getObjectMetadata = async(key: string): Promise<ImageMetadata> =>{
     })
 
     const {Metadata} = await s3Client.send(command)
-
-    console.log({Metadata});
-
     return Metadata as ImageMetadata
     
 
@@ -64,19 +61,19 @@ const _getObjectMetadata = async(key: string): Promise<ImageMetadata> =>{
 //prettier-ignore
 export const getAllPosts = async()=>{
 
-    const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
-
-    console.log({uniqueUserIdentifier});
-    
+    const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier() //* so that we only return URLs belonging to the user who made this post.
 
     const objects = await _listObjectsContents()
 
     if(!objects){return []}
 
-
-
     const objectsWithMetadata = await Promise.all(objects.map(async(object)=>{
+
+        console.log(object);
+        
+
         return {
+            time: object.LastModified,
             objectURL: _getObjectPublicURL(object), 
             key: object.Key!, //* the key is to delete the file, the url is to show the file
             metadata: await _getObjectMetadata(object.Key!) as ImageMetadata
@@ -84,7 +81,7 @@ export const getAllPosts = async()=>{
     }))
 
     return objectsWithMetadata.filter((object)=>{
-        return object.metadata.uniqueuseridentifier === uniqueUserIdentifier
+        return object.metadata.uniqueuseridentifier === uniqueUserIdentifier //! AWS for some reason makes metadata all lower case.
     })
 
 }

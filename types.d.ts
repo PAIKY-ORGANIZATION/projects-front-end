@@ -15,6 +15,6 @@ type NavbarProps = {
 
 
 type ImageMetadata =  {
-    uniqueuseridentifier: string, //! AWS for some reason makes this all lower case that is why I said it like this.
+    uniqueuseridentifier: string, //! AWS sets metadata all lower case that is why I set it like this.
     description: string
 }
