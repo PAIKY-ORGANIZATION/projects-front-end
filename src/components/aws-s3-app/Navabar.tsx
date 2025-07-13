@@ -20,11 +20,8 @@ export default function  Navbar() {
                 resourceType: 'Github',
                 href: 'https://github.com/PAIKY-ORGANIZATION/AWS_S3_Public'
             },
-            {
-                resourceType: 'Youtube',
-                href: 'https://github.com/PAIKY-ORGANIZATION/AWS_S3_Public'
-            }
-        ]
+        ],
+        docsHref: 'https://documenter.getpostman.com/view/40182356/2sB34foMGE'
     }
 
     return (

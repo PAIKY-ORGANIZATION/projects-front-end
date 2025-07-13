@@ -10,7 +10,8 @@ type NavbarProps = {
         resourceType: urlTypes;
         href: string
 
-    }[]
+    }[],
+    docsHref?: string
 }
 
 

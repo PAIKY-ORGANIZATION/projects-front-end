@@ -13,6 +13,7 @@ type Params = {
     size: number
     description: string
 }
+
 export const getSignerURL = async({type, size, description}: Params)=>{
 
     try{

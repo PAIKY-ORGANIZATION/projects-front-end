@@ -13,7 +13,7 @@ const iconsMap: { [key in urlTypes]: JSX.Element } = {
 };
 
 //prettier-ignore
-export default function NavBarShared({ endPoints, resources }: NavbarProps) {
+export default function NavBarShared({ endPoints, resources, docsHref }: NavbarProps) {
 
     return (
         <div className="flex items-center justify-between bg-[#161616] w-full px-6 py-3">
@@ -33,9 +33,9 @@ export default function NavBarShared({ endPoints, resources }: NavbarProps) {
                     </Link>
                 ))}
             </div>
-            <div className="ml-6">
-                <ReadDocs href="/docs"/>
-            </div>
+            { docsHref && <div className="ml-6">
+                <ReadDocs href={docsHref} />
+            </div>}
         </div>
     );
 }
