@@ -1,7 +1,6 @@
 'use client';
 
 import { getSignerURL } from '@/actions/get-signed-url';
-import { computeSHA256 } from '@/utils/compute-checksum';
 import axios from 'axios';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -22,9 +21,8 @@ export default function PostForm() {
         const uploadToastId = toast.loading('Uploading...') //* We dismiss this and remove it from the screen once there's a response from trying to upload the image.
          
         try{
-            const checkSum = await computeSHA256(image) //$ This is optional and guarantees that the image has keeps its integrity
             
-            const result = await getSignerURL(image.type, image.size, checkSum, content)
+            const result = await getSignerURL(image.type, image.size, content)
 
             if(!result.success){ toast.error(result.message!); return}
             const url = result.url

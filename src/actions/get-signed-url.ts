@@ -7,7 +7,7 @@ import { randomUUID } from "crypto"
 import { runRateLimiterCheck } from "@/lib/run-rate-limiter-check"
 import { getOrSetUniqueUserIdentifier } from "@/utils/uuid-cookie"
 
-export const getSignerURL = async(type: string, size: number, checkSum: string, description: string)=>{
+export const getSignerURL = async(type: string, size: number, description: string)=>{
 
     try{
         const isLimited = await runRateLimiterCheck()
@@ -22,7 +22,6 @@ export const getSignerURL = async(type: string, size: number, checkSum: string, 
             Key: randomUUID(),
             ContentType: type,
             ContentLength: size,  //! If the client passes an invalid size AWS will literally reject it.
-            ChecksumSHA256: checkSum, //$ This is optional and guarantees that the image has keeps its integrity
             Metadata: {
                 uniqueuseridentifier: uniqueUserIdentifier, //! AWS sets metadata all lower case that is why I set it like this.
                 description
