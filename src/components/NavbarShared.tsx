@@ -15,6 +15,9 @@ const iconsMap: { [key in urlTypes]: JSX.Element } = {
 //prettier-ignore
 export default function NavBarShared({ endPoints, resources, docsHref }: NavbarProps) {
 
+    console.log({docsHref});
+    
+
     return (
         <div className="flex items-center justify-between bg-[#161616] w-full px-6 py-3">
             <div className="flex items-center px-8 gap-10 flex-[4]">

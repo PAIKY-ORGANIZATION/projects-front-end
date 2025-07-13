@@ -25,6 +25,6 @@ export default function  Navbar() {
     }
 
     return (
-        <NavBarShared endPoints={navbarProps.endPoints} resources={navbarProps.resources}></NavBarShared>
+        <NavBarShared endPoints={navbarProps.endPoints} resources={navbarProps.resources} docsHref={navbarProps.docsHref}></NavBarShared>
     )
 }
