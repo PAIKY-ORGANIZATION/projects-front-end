@@ -2,13 +2,11 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import ColorButton from '../Button';
-import ReadDocs from '../ReadDocs';
 import { deleteObject } from '@/actions/delete-object';
-import Link from 'next/link';
 import ProfilePicture from '../ProfilePicture';
+import toast from 'react-hot-toast';
 
 type Post = {
 	// id: string;
@@ -26,14 +24,18 @@ interface PostsPageProps {
 //prettier-ignore
 export default function PostsPage({ posts }: PostsPageProps) {
 	const onDeletePost = async (key: string) => {
-		
-		const result = await deleteObject(key)
-
-		console.log(result);
-		
-
+		await deleteObject(key)
 		return;
 	};
+
+	const onShareUrl = (url: string)=>{
+		
+		navigator.clipboard.writeText(url)
+		toast.success('Copied Image URL to clipboard!')
+		return
+	}
+
+	const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
 	return (
 		<div className="max-w-[40%] mx-auto p-4 space-y-6">
@@ -44,13 +46,31 @@ export default function PostsPage({ posts }: PostsPageProps) {
 			) : (
 				<div className="space-y-4">
 					{posts.map((post) => (
-						<div key={post.objectURL} className="bg-[#1c1c1c] p-4 rounded-xl space-y-3" >
+						<div key={post.objectURL} className="bg-[#1c1c1c] p-4 rounded-sm space-y-3" >
 							<div className="flex justify-between items-center">
-								<div className='flex items-center'>
+								<div className='flex items-center gap-2'>
 									<ProfilePicture></ProfilePicture>
+									<p className="font-bold">You -</p>
 									<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
 								</div>
-								<ColorButton color="red" width="fit" onClick={() => onDeletePost(post.key) }> Delete </ColorButton>
+								<div className="relative">
+									<button className="w-8 h-8 rounded hover:bg-gray-700 flex items-center justify-center" onClick={() => setOpenDropdown(post.key)}>
+										<span className="text-xl">⋮</span>
+									</button>
+
+									{openDropdown === post.key && (
+										<div className="absolute right-0 mt-1 w-28 bg-[#2a2a2a] border border-gray-700 rounded shadow-lg z-10">
+											<button onClick={() => { onDeletePost(post.key); setOpenDropdown(null); }}
+											className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700">
+												Delete
+											</button>
+											<button onClick={() => { onShareUrl(post.objectURL); setOpenDropdown(null); }}
+											className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-700">
+												Share URL
+											</button>
+										</div>
+									)}
+								</div>
 							</div>
 
 							{post.objectURL && (

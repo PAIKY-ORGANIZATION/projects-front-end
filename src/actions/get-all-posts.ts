@@ -1,7 +1,7 @@
 "use server"
 
 import { s3Client } from "@/lib/s3-client";
-import { ListObjectsCommand, ListObjectsCommandOutput, _Object } from "@aws-sdk/client-s3";
+import { ListObjectsCommand, ListObjectsCommandOutput, _Object, HeadObjectCommand } from "@aws-sdk/client-s3";
 
 
 
@@ -26,7 +26,7 @@ import { ListObjectsCommand, ListObjectsCommandOutput, _Object } from "@aws-sdk/
 //     }
 //  ]
 
-
+//prettier-ignore
 const _listObjectsContents = async()=>{
     const command = new ListObjectsCommand({
         Bucket: process.env.AWS_BUCKET_NAME
@@ -36,13 +36,24 @@ const _listObjectsContents = async()=>{
 }
 
 
-
+//prettier-ignore
 const _getObjectPublicURL = (object: _Object)=>{
     return 'https://' + process.env.AWS_BUCKET_NAME + '.s3.' + process.env.AWS_BUCKET_REGION + '.amazonaws.com/' + object.Key
 }
 
 
+//prettier-ignore
+const _getObjectMetadata = async(key: string)=>{
 
+    const command = new HeadObjectCommand({
+        
+    })
+
+    return
+}
+
+
+//prettier-ignore
 export const getAllPosts = async()=>{
 
     const objects = await _listObjectsContents()
@@ -50,7 +61,11 @@ export const getAllPosts = async()=>{
     if(!objects){return []}
 
     const urls =  objects.map((object)=> {
-        return {objectURL: _getObjectPublicURL(object), key: object.Key!} //* the key is to delete the file, the url is to show the file
+        return {
+            objectURL: _getObjectPublicURL(object), 
+            key: object.Key!,
+            metadata: _getObjectMetadata()
+        } //* the key is to delete the file, the url is to show the file
     })
 
     return urls

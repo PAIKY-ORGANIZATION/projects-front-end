@@ -18,18 +18,16 @@ export default function PostForm() {
     const handleSubmit = async()=>{
         
         if(!image){toast.error('Please select an image'); return}
+        if(!content){toast.error('Please add a caption'); return}
         const uploadToastId = toast.loading('Uploading...') //* We dismiss this and remove it from the screen once there's a response from trying to upload the image.
          
         try{
-            
             const checkSum = await computeSHA256(image) //$ This is optional and guarantees that the image has keeps its integrity
             
             const result = await getSignerURL(image.type, image.size, checkSum, content)
             if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
             
             const url = result.url
-
-            console.log({url});
             
 
             await axios.put(url, image, {
@@ -52,6 +50,8 @@ export default function PostForm() {
         }catch(e){
             toast.error('⚠️ CHECK CONSOLE ⚠️'  + e)
             console.log(e);	
+        } finally{
+            toast.dismiss(uploadToastId)
         }
 
     }
