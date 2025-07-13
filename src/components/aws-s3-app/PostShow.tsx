@@ -1,4 +1,4 @@
-// app/posts/page.tsx
+
 
 'use client';
 
@@ -10,8 +10,10 @@ import toast from 'react-hot-toast';
 
 type Post = {
 	// id: string;
-	objectURL?: string;
+	objectURL: string;
 	key: string
+
+	metadata: ImageMetadata
 	// content: string;
 	// createdAt: string;
 };
@@ -24,7 +26,12 @@ interface PostsPageProps {
 //prettier-ignore
 export default function PostsPage({ posts }: PostsPageProps) {
 	const onDeletePost = async (key: string) => {
-		await deleteObject(key)
+		try{
+			await deleteObject(key)
+			toast.success('Puff! Post deleted!')
+		}catch(e){
+			console.log('Something went wrong deleting the post');	
+		}
 		return;
 	};
 
@@ -38,7 +45,7 @@ export default function PostsPage({ posts }: PostsPageProps) {
 	const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
 	return (
-		<div className="max-w-[40%] mx-auto p-4 space-y-6">
+		<div className="min-w-[40%] max-w-[600px] mx-auto p-4 space-y-6">
 			<h1 className="text-3xl font-bold text-center">Your Posts</h1>
 
 			{posts.length === 0 ? (
@@ -53,6 +60,8 @@ export default function PostsPage({ posts }: PostsPageProps) {
 									<p className="font-bold">You -</p>
 									<span className="text-xs text-gray-400"> {new Date( '2023-01-01' ).toLocaleString()} </span>
 								</div>
+
+								{/* //* ==================  Three dots menu ================ */}
 								<div className="relative">
 									<button className="w-8 h-8 rounded hover:bg-gray-700 flex items-center justify-center" onClick={() => setOpenDropdown(post.key)}>
 										<span className="text-xl">⋮</span>
@@ -72,14 +81,16 @@ export default function PostsPage({ posts }: PostsPageProps) {
 									)}
 								</div>
 							</div>
+							{/* //* ==================  End of Three dots menu ================ */}
 
+
+							<p className="text-white text-sm">
+								{post.metadata?.description || 'No description'}
+							</p>
 							{post.objectURL && (
 								<Image src={post.objectURL} alt="Post image" width={600} height={400} className="w-full rounded-md object-contain" />
 							)}
 
-							<p className="text-white text-sm">
-								{'Test content'}
-							</p>
 						</div>
 					))}
 				</div>

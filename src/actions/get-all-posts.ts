@@ -1,6 +1,7 @@
 "use server"
 
 import { s3Client } from "@/lib/s3-client";
+import { getOrSetUniqueUserIdentifier } from "@/utils/uuid-cookie";
 import { ListObjectsCommand, ListObjectsCommandOutput, _Object, HeadObjectCommand } from "@aws-sdk/client-s3";
 
 
@@ -43,31 +44,44 @@ const _getObjectPublicURL = (object: _Object)=>{
 
 
 //prettier-ignore
-const _getObjectMetadata = async(key: string)=>{
+const _getObjectMetadata = async(key: string): Promise<ImageMetadata> =>{
 
     const command = new HeadObjectCommand({
-        
+        Bucket: process.env.AWS_BUCKET_NAME!,
+        Key: key
     })
 
-    return
+    const {Metadata} = await s3Client.send(command)
+
+    console.log({Metadata});
+
+    return Metadata as ImageMetadata
+    
+
 }
 
 
 //prettier-ignore
 export const getAllPosts = async()=>{
 
+    const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
+
     const objects = await _listObjectsContents()
 
     if(!objects){return []}
 
-    const urls =  objects.map((object)=> {
+
+
+    const objectsWithMetadata = await Promise.all(objects.map(async(object)=>{
         return {
             objectURL: _getObjectPublicURL(object), 
-            key: object.Key!,
-            metadata: _getObjectMetadata()
-        } //* the key is to delete the file, the url is to show the file
-    })
+            key: object.Key!, //* the key is to delete the file, the url is to show the file
+            metadata: await _getObjectMetadata(object.Key!) as ImageMetadata
+        }
+    }))
 
-    return urls
+    return objectsWithMetadata.filter((object)=>{
+        return object.metadata.userId
+    })
 
 }

@@ -12,3 +12,9 @@ type NavbarProps = {
 
     }[]
 }
+
+
+type ImageMetadata =  {
+    uniqueUserIdentifier: string,
+    description: string
+}

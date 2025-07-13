@@ -25,12 +25,12 @@ export default function PostForm() {
             const checkSum = await computeSHA256(image) //$ This is optional and guarantees that the image has keeps its integrity
             
             const result = await getSignerURL(image.type, image.size, checkSum, content)
-            if(result.message !== 'Success'){ toast.error('Something went wrong creating the url'); return}
-            
+
+            if(!result.success){ toast.error(result.message!); return}
             const url = result.url
             
 
-            await axios.put(url, image, {
+            await axios.put(url!, image, {
                 headers: {
                     "Content-Type": image?.type || "application/octet-stream"
                 }
