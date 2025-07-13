@@ -14,8 +14,6 @@ const iconsMap: { [key in urlTypes]: JSX.Element } = {
 
 //prettier-ignore
 export default function NavBarShared({ endPoints, resources, docsHref }: NavbarProps) {
-
-    console.log({docsHref});
     
 
     return (
