@@ -35,10 +35,15 @@ export default function PostsPage({ posts }: PostsPageProps) {
 	};
 
 	const onShareUrl = (url: string)=>{
-		
-		navigator.clipboard.writeText(url)
-		toast.success('Copied Image URL to clipboard!')
-		return
+		//! Seems like this doesn't work if we're using HTTP and not HTTPS
+		try{
+			navigator.clipboard.writeText(url)
+			toast.success('Copied Image URL to clipboard!')
+			return
+			
+		}catch(e){
+			console.log(e);	
+		}
 	}
 
 	const [openDropdown, setOpenDropdown] = useState<string | null>(null);
