@@ -89,9 +89,9 @@ export default function PostsPage({ posts }: PostsPageProps) {
 							{post.objectURL && (
 								<Image src={post.objectURL} alt="Post image" width={600} height={400} className="w-full rounded-md object-contain" />
 							)}
-
 						</div>
 					))}
+					<p className="text-center text-gray-500"> No more posts available</p>
 				</div>
 			)}
 		</div>
