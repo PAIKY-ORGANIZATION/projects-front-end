@@ -22,7 +22,7 @@ export default function PostForm() {
          
         try{
             
-            const result = await getSignerURL(image.type, image.size, content)
+            const result = await getSignerURL({ type: image.type, size: image.size, description: content})
 
             if(!result.success){ toast.error(result.message!); return}
             const url = result.url

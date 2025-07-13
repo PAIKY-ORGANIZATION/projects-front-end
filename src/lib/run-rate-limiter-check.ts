@@ -1,7 +1,7 @@
 import {isRateLimited} from 'redis-rate-limiter-express'
 import { redisClient } from "./redis-client";
 import { RedisClientType } from "redis";
-import { getOrSetUniqueUserIdentifier } from "@/utils/uuid-cookie";
+import { getOrSetUniqueUserIdentifier } from "@/utils/get-or-set-unique-user-identifier";
 
 
 //? Hopefully I can get the unique user identifier to be emails instead of IP addresses.

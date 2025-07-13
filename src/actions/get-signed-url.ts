@@ -5,17 +5,22 @@ import { PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { randomUUID } from "crypto"
 import { runRateLimiterCheck } from "@/lib/run-rate-limiter-check"
-import { getOrSetUniqueUserIdentifier } from "@/utils/uuid-cookie"
+import { getOrSetUniqueUserIdentifier } from "@/utils/get-or-set-unique-user-identifier"
 
-export const getSignerURL = async(type: string, size: number, description: string)=>{
+
+type Params = {
+    type: string
+    size: number
+    description: string
+}
+export const getSignerURL = async({type, size, description}: Params)=>{
 
     try{
+        //* Look for a rate limit
         const isLimited = await runRateLimiterCheck()
+        if(isLimited){ return {message: 'Too many requests, please try again in a moment', success: false}}
 
-        if(isLimited){
-            return {message: 'Too many requests, please try again in a moment', success: false}
-        }
-
+        //* Create a signed URL from AWS
         const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
         const command = new PutObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME!,
@@ -28,8 +33,6 @@ export const getSignerURL = async(type: string, size: number, description: strin
             }
         })
     
-    
-    
         const presignedUrl = await getSignedUrl(s3Client, command, {expiresIn: 60})
     
         return {message: 'Success', success: true, url: presignedUrl}
@@ -37,6 +40,5 @@ export const getSignerURL = async(type: string, size: number, description: strin
     }catch(e){
         return {message: 'Something went wrong creating the url', success: false, error: e}
     }
-        
-
 }
+
