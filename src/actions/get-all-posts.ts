@@ -66,6 +66,9 @@ export const getAllPosts = async()=>{
 
     const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
 
+    console.log({uniqueUserIdentifier});
+    
+
     const objects = await _listObjectsContents()
 
     if(!objects){return []}
@@ -81,7 +84,7 @@ export const getAllPosts = async()=>{
     }))
 
     return objectsWithMetadata.filter((object)=>{
-        return object.metadata.userId
+        return object.metadata.uniqueuseridentifier === uniqueUserIdentifier
     })
 
 }

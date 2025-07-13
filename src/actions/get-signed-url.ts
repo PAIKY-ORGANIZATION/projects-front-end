@@ -24,7 +24,7 @@ export const getSignerURL = async(type: string, size: number, checkSum: string, 
             ContentLength: size,  //! If the client passes an invalid size AWS will literally reject it.
             ChecksumSHA256: checkSum, //$ This is optional and guarantees that the image has keeps its integrity
             Metadata: {
-                uniqueUserIdentifier: uniqueUserIdentifier,
+                uniqueUserIdentifier: uniqueUserIdentifier, //! AWS for some reason makes this all lower case that is why I said it like this.
                 description
             }
         })
