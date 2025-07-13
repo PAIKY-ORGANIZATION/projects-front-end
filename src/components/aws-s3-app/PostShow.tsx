@@ -13,7 +13,7 @@ type Post = {
 	key: string
 
 	metadata: ImageMetadata
-	time: Date
+	time: Date | undefined
 };
 
 interface PostsPageProps {
@@ -28,7 +28,8 @@ export default function PostsPage({ posts }: PostsPageProps) {
 			await deleteObject(key)
 			toast.success('Puff! Post deleted!')
 		}catch(e){
-			console.log('Something went wrong deleting the post');	
+			toast.error('Something went wrong deleting the post');
+			console.log(e);	
 		}
 		return;
 	};
@@ -56,7 +57,7 @@ export default function PostsPage({ posts }: PostsPageProps) {
 								<div className='flex items-center gap-2'>
 									<ProfilePicture></ProfilePicture>
 									<p className="font-bold">You -</p>
-									<span className="text-xs text-gray-400"> {post.time.toLocaleString()} </span>
+									<span className="text-xs text-gray-400"> {post.time?.toLocaleString()} </span>
 								</div>
 
 								{/* //* ==================  Three dots menu ================ */}

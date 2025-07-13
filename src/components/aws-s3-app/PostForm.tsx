@@ -81,6 +81,7 @@ export default function PostForm() {
                         if (file) setImage(file)
                     }}
                 />
+                <p className='text-center text-green-400'> Only you will be able to see this image once uploaded to S3!</p>
                 
                 {/* //* I know you would normally use a label with "htmlFor=''" but I do this in order to re-use the ColorButton. */}
                 <ColorButton color="blue" width="full" type="button" onClick={() => document.getElementById('fileInput')?.click()} >
