@@ -7,6 +7,8 @@ import { getOrSetUniqueUserIdentifier } from "@/utils/get-or-set-unique-user-ide
 //? Hopefully I can get the unique user identifier to be emails instead of IP addresses.
 export const runRateLimiterCheck = async(): Promise<boolean>=> {
 
+    console.log('test1');
+    
 
     const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
        

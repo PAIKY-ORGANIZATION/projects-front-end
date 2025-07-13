@@ -19,10 +19,15 @@ export const getSignerURL = async({type, size, description}: Params)=>{
     try{
         //* Look for a rate limit
         const isLimited = await runRateLimiterCheck()
+        console.log('test2');
+
         if(isLimited){ return {message: 'Too many requests, please try again in a moment', success: false}}
 
         //* Create a signed URL from AWS
         const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
+
+        console.log('test3');
+
         const command = new PutObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME!,
             Key: randomUUID(),
@@ -33,9 +38,10 @@ export const getSignerURL = async({type, size, description}: Params)=>{
                 description
             }
         })
-    
+        
         const presignedUrl = await getSignedUrl(s3Client, command, {expiresIn: 60})
-    
+        console.log('test4');
+        
         return {message: 'Success', success: true, url: presignedUrl}
         
     }catch(e){
