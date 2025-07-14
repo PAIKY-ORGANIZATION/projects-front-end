@@ -7,8 +7,8 @@ import crypto from 'node:crypto'
 
 export const getOrSetUniqueUserIdentifier = async(): Promise<string>=>{
     //* If we can get the IP address from middleware, use it
-    const headersStore = await headers();
-    const ip = headersStore.get('ip')  //* This is passed from middleware
+    const headersStore = await headers(); 
+    const ip = headersStore.get('ip')   //$ This depends on middleware for the IP address 
 
     if(ip)return ip
 

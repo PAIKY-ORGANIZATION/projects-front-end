@@ -2,6 +2,8 @@
 
 
 /config/shared.env
+s3-app-GIT-IGNORE.txt
+
 
 # dependencies
 /node_modules
