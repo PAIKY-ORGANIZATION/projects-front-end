@@ -3,10 +3,13 @@ import fs from 'node:fs'
 
 export const GET = async()=>{
 
+    const s3AppLogs = fs.readFileSync('s3-app.txt', 'utf-8')
+        .split('\n').slice(-200).join('\n'); //* Get the last 200 lines
 
-    const s3AppLogs = fs.readFileSync('s3-app.txt')
 
-    const anotherAppLogs = fs.readFileSync('another-test-app.txt')
+    //? Remove this test when needed
+    const anotherAppLogs = fs.readFileSync('another-test-app.txt', 'utf-8')
+        .split('\n').slice(-200).join('\n') //* Get the last 200 lines
 
     const separator = `\n\n  ${'='.repeat(200)}   \n\n`;
 

@@ -7,7 +7,7 @@ export default async function Posts() {
 
     await requestLog({ filePath: 's3-app.txt', logInfo: 'Visited post-show page'})
 
-    const posts =  await getAllPosts()
+    const posts =  await getAllPosts() //$ This depends on middleware for the IP address
 
     
     return (

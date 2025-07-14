@@ -7,8 +7,10 @@ export const middleware = async (req: NextRequest)=>{
     //$ In this case it'll have two purposes:
         //$ 1. Rate limiting
         //$ 2. Logging
-    // @ts-expect-error // ¡
-    const unparsedIp = req.ip || req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip');
+    const unparsedIp =   req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip');
+
+    console.log({unparsedIp});
+    
 
     const ip = unparsedIp?.split(',')[0] || '';
     
