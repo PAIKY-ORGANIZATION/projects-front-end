@@ -7,9 +7,6 @@ export default async function Posts() {
 
     await requestLog({ filePath: 's3-app.txt', logInfo: 'Visited post-show page'})
 
-
-
-
     const posts =  await getAllPosts()
 
     

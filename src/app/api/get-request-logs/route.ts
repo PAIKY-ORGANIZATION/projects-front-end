@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import fs from 'node:fs'
 
-export const GET = async(_NextRequest: NextRequest)=>{
+export const GET = async()=>{
 
 
     const s3AppLogs = fs.readFileSync('s3-app.txt')
