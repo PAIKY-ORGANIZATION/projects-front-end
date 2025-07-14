@@ -4,7 +4,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { deleteObject } from '@/actions/delete-object';
+import { deleteObject } from '@/actions/s3-app/delete-object';
 import ProfilePicture from '../ProfilePicture';
 import toast from 'react-hot-toast';
 

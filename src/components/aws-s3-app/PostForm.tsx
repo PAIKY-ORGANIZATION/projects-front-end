@@ -1,6 +1,6 @@
 'use client';
 
-import { getSignerURL } from '@/actions/get-signed-url';
+import { getSignerURL } from '@/actions/s3-app/get-signed-url';
 import axios from 'axios';
 import Image from 'next/image';
 import { useState } from 'react';
