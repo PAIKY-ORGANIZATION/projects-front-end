@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'next-app-public-bucket.s3.us-east-2.amazonaws.com',
+        hostname: 'enabled-public-access-projects.s3.us-east-2.amazonaws.com',
         port: '',
         pathname: '/**'
       }
