@@ -1,8 +1,18 @@
-import { NextRequest } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
+import fs from 'node:fs'
 
-export const GET = async(NextRequest: NextRequest)=>{
+export const GET = async(_NextRequest: NextRequest)=>{
 
-    
 
-    return
+    const s3AppLogs = fs.readFileSync('s3-app.txt')
+
+    const anotherAppLogs = fs.readFileSync('another-test-app.txt')
+
+    const separator = `\n\n  ${'='.repeat(200)}   \n\n`;
+
+     const combined = `  S3 APP LOGS ${separator} \n${s3AppLogs} \n\n  ANOTHER TEST APP LOGS ${separator}\n${anotherAppLogs}`;
+
+    return new NextResponse(combined, {
+        headers: {'Content-Type': 'text/plain'}
+    })
 }

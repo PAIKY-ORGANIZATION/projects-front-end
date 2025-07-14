@@ -5,10 +5,14 @@ import { requestLog } from "@/utils/log-visit";
 
 export default async function Posts() {
 
-    await requestLog({ fileName: 's3-app', logInfo: 'visited post-show page'})
+    await requestLog({ filePath: 's3-app.txt', logInfo: 'Visited post-show page'})
+
+
+
 
     const posts =  await getAllPosts()
 
+    
     return (
         <PostsPage posts={posts}></PostsPage>
     )
