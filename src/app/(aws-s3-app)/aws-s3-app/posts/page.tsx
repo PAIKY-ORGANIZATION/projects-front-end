@@ -1,19 +1,11 @@
 import { getAllPosts } from "@/actions/s3-app/get-all-posts";
 import PostsPage from "@/components/aws-s3-app/PostShow";
-import {logRequest} from 'req-logger-express'
-import {headers} from 'next/headers'
+import { requestLog } from "@/utils/log-visit";
 
 
 export default async function Posts() {
 
-    const headerStore = await headers()
-    const ip = headerStore.get('ip') || ''
-
-    await logRequest({
-        fileName: 'req.log-s3-app',
-        ip,
-        logInfo: ''
-    })
+    await requestLog({ fileName: 's3-app', logInfo: 'visited post-show page'})
 
     const posts =  await getAllPosts()
 
@@ -21,3 +13,6 @@ export default async function Posts() {
         <PostsPage posts={posts}></PostsPage>
     )
 }
+
+
+
