@@ -40,7 +40,7 @@ jobs:
             echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./config/shared.env
             echo "UNIQUE_APP_NAME=${{ secrets.UNIQUE_APP_NAME }}" >> ./config/shared.env
             echo "AWS_BUCKET_REGION=us-east-2" >> ./config/shared.env #$ This is NOT private but still the shared.env file doesn't get uploaded
-            echo "AWS_BUCKET_NAME=next-app-public-bucket" >> ./config/shared.env #$ Same here
+            echo "AWS_BUCKET_NAME=${{secrets.AWS_BUCKET_NAME}}" >> ./config/shared.env #$ Same here
 
             sudo docker compose down 
             #* PICK ONE, READ README.md
