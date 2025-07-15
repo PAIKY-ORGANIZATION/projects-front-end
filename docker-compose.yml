@@ -23,7 +23,7 @@ services:
     ports:
       - "3005:3000"
     volumes:
-      - "./:/app"
+      - "./src:/app/src"
     build: .
     # env_file:
       #$ this is already getting picked when I run the npm script 
