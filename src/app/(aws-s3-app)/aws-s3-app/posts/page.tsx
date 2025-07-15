@@ -5,7 +5,7 @@ import { requestLog } from "@/utils/log-visit";
 
 export default async function Posts() {
 
-    await requestLog({ filePath: 's3-app.txt', logInfo: 'Visited post-show page'})
+    await requestLog({ filePath: 's3-app-GITIGNORE.txt', logInfo: 'Visited post-show page'})
 
     const posts =  await getAllPosts() //$ This depends on middleware for the IP address
 

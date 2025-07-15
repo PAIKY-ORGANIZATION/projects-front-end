@@ -38,9 +38,6 @@ export const getAllPosts = async()=>{
 
     const objectsWithMetadata = await Promise.all(objects.map(async(object)=>{
 
-        console.log(object);
-        
-
         return {
             time: object.LastModified,
             objectURL: _getObjectPublicURL(object), 
