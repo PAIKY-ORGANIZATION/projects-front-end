@@ -29,6 +29,8 @@ services:
       #$ this is already getting picked when I run the npm script 
       # - config/local.env 
     command: sh -c "npm run build && npm run start_docker"
+    depends_on:
+      - redis
 
   #! Read Readme.md > Question
   redis:
