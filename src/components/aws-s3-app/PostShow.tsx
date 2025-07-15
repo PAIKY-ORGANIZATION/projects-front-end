@@ -33,7 +33,7 @@ export default function PostsPage({ posts }: PostsPageProps) {
 		}
 		return;
 	};
-	
+
 
 	const onShareUrl = (url: string)=>{
 		//! Seems like this doesn't work if we're using HTTP and not HTTPS
@@ -47,6 +47,7 @@ export default function PostsPage({ posts }: PostsPageProps) {
 		}
 	}
 
+	
 	const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
 	return (
