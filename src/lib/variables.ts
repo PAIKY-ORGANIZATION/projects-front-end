@@ -1,1 +1,1 @@
-export const s3AppLogsPath = './s3-app-GITIGNORE.txt'
+export const s3AppLogsPath = './s3-app-GIT-IGNORE.txt'
