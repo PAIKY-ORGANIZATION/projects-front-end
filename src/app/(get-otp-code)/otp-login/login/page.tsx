@@ -1,5 +1,6 @@
 "use client"
 
+import { sendOTP } from '@/actions/otp-app/send-otp';
 // LoginFormWithInfo.tsx
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -8,22 +9,28 @@ import toast from 'react-hot-toast';
 //prettier-ignore
 export default function LoginFormWithInfo() {
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
-        const contact =  formData.get('contact')
-        const password = formData.get('password')
-        const username = formData.get('username')
+        const contact =  formData.get('contact') as string | null
+        const password = formData.get('password') as string | null
+        const username = formData.get('username') as string | null
         const confirmPassword = formData.get('confirmPassword')
 
         if(!contact || !password || !username || !confirmPassword){
             toast.error('Please fill in all fields')
             return
         }
-        
-    
-        return
+        if(password !== confirmPassword){
+            toast.error('Passwords do not match')
+            return
+        }
+
+        const result = await sendOTP({contact, username, password})    
+        if(!result.success){
+            toast.error(result.message)
+        } 
     }
 
 
@@ -49,22 +56,22 @@ export default function LoginFormWithInfo() {
 					<form className="space-y-4" onSubmit={handleSubmit}>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Username </label>
-							<input type="text" placeholder="your_username"
+							<input type="text" placeholder="your_username" name="username" value="test"
 							className="w-full text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Email or Phone</label>
-							<input type="text" name="contact" placeholder="you@example.com or +1234567890"
+							<input type="text" name="contact" placeholder="you@example.com or +14155552671" 
                             className="w-full text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Password </label>
-							<input type="password" name="password" placeholder="••••••••"
+							<input type="password" name="password" placeholder="••••••••" value="11111111"
                             className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1" > Confirm Password </label>
-							<input type="password"
+							<input type="password" value="11111111"
 							className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"
                             placeholder="••••••••" name="confirmPassword"/>
 						</div>
