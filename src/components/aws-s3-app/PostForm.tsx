@@ -53,16 +53,20 @@ export default function PostForm() {
         }
 
     }
-
-  return (
-    <>
+    
+    return (
+        <>
         {/* <ReadDocs href={'/docs/aws-s3-app'}></ReadDocs> */}
-        <div className='flex items-center justify-around w-full  max-w-xl'>
-            <h1 className="text-3xl font-bold text-center"> AWS S3 Upload Demo</h1>    
-            <Image src="/s3.svg" alt="Logo" width={100} height={100}></Image>
+        <div className="flex flex-col items-center justify-center space-y-2 mb-4">
+            <Image src="/s3.svg" alt="Logo" width={80} height={80} />
+            <h1 className="text-2xl font-semibold text-center">AWS S3 Image Upload Demo!</h1>
+        </div>
+        <div className="text-center text-gray-300 space-y-1 mb-6">
+            <p className="text-sm sm:text-base">Upload an image and add a caption.</p>
+            <p className="text-sm sm:text-base">Once uploaded, your post will be securely stored in an S3 bucket. (You  may visit your posts at any time.)</p>
         </div>
 
-        <div className="max-w-xl w-full mx-auto   rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around bg-[#1c1c1c]">
+        <div className="max-w-xl w-full mx-auto   rounded-xl p-4 space-y-4 min-h-[35%] flex flex-col justify-around bg-[#1c1c1c] border border-gray-600">
                 {image && (
                     <img src={URL.createObjectURL(image)} alt="Preview" className="rounded-lg max-h-60 object-contain" />
                 )}
@@ -72,7 +76,7 @@ export default function PostForm() {
                 className="w-full resize-none border border-gray-300 rounded-md p-2 text-sm bg-[#414141] text-white"
                 />
             </div>
-            <div className="flex flex-col  gap-2 w-[80%] items-center mx-auto">
+            <div className="flex flex-col gap-5 w-[90%] max-w-sm mx-auto mt-">
                 <input id="fileInput" type="file" accept="image/*" className="hidden"
                     onChange={(e) => {
                         const file = e.target.files?.[0]

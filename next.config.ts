@@ -1,4 +1,7 @@
 import '@/bootstrap-env';
+import { connectToRedis } from '@/lib/redis-client';
+
+connectToRedis();
 
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {

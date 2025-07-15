@@ -9,6 +9,8 @@ export default async function RootLayout({children,}: Readonly<{children: React.
     return (
         <>
             <Navbar></Navbar>
+			<div className='fixed top-0 left-50  bottom-0 right-50 bg-[#212121] z-[-1]'></div>
+
             {children}
         </>
 
