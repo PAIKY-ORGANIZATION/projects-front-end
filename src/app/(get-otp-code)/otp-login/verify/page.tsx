@@ -6,10 +6,15 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { resendOtp } from '@/actions/otp-app/resend-opt';
 import { verifyOtp } from '@/actions/otp-app/verify-otp';
+import { useRouter } from 'next/navigation';
+
+
 
 // prettier-ignore
 export default function OTPVerificationForm() {
 	const [otp, setOtp] = useState(['', '', '', '', '', ''])
+
+	const router = useRouter()
 
 	//* Getting the email from the url
 	const searchParams = useSearchParams()
@@ -43,6 +48,7 @@ export default function OTPVerificationForm() {
 			return
 		}
 		toast.success(result.message)
+		router.push('/otp-login/success')
 
 	}
 
