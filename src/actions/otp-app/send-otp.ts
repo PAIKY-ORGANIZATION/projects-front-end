@@ -16,12 +16,19 @@ export const sendOTP = async({contact, username, password, confirmPassword}: Par
             password: z.string().min(6).max(20),
             confirmPassword: z.string().min(6).max(20),
             contact: z.union([
-                z.string().min(10).email('Please enter a valid email'),
+                z.string().email('Please enter a valid email'),
                 z.string().regex(/^\+[1-9]\d{7,14}$/, { message: 'Phone number must be in international format, e.g. +1234567890' }),
             ]),
         })
         
         const result = registerSchema.parse({contact, username, password, confirmPassword})
+
+        const isPhone = /^\+[1-9]\d{7,14}$/.test(result.contact)
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(result.contact)
+
+        console.log({isPhone, isEmail});
+        
+
         
         return {
             success: true,
@@ -39,4 +46,15 @@ export const sendOTP = async({contact, username, password, confirmPassword}: Par
         }
     }
 
+}
+
+
+
+
+
+const _sendSMS = async()=>{
+
+    
+
+    return
 }
