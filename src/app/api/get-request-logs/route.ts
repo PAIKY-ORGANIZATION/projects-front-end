@@ -1,9 +1,10 @@
+import { s3AppLogsPath } from "@/lib/variables";
 import { NextResponse } from "next/server"
 import fs from 'node:fs'
 
 export const GET = async()=>{
 
-    const s3AppLogs = fs.readFileSync('s3-app-GIT-IGNORE.txt', 'utf-8')
+    const s3AppLogs = fs.readFileSync(s3AppLogsPath, 'utf-8')
         .split('\n').slice(-200).join('\n'); //* Get the last 200 lines
 
 

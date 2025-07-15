@@ -1,0 +1,1 @@
+export const s3AppLogsPath = './s3-app-GITIGNORE.txt'
