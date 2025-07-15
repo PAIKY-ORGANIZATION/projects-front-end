@@ -8,7 +8,7 @@ export const redisClient = createClient({
     }
 })
 
-export const connectToRedis = async()=>{
+const connectToRedis = async()=>{
     if (redisClient.isOpen || redisClient.isReady) return; //! Need to check this because next-config loads multiple times
     try{
         await redisClient.connect()
@@ -19,3 +19,4 @@ export const connectToRedis = async()=>{
 }
 
 
+connectToRedis()

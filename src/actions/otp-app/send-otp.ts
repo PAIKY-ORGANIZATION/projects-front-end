@@ -62,8 +62,6 @@ const saveHashToRedis = async(contactType: 'phone' | 'email', {contact, username
     const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
 
 
-
-
     const otpUserCachedInfo: OtpUserCachedInfo =  {
         contactType,
         contact,
@@ -72,7 +70,6 @@ const saveHashToRedis = async(contactType: 'phone' | 'email', {contact, username
     }
 
     await redisClient.hSet(otpUserHashKey(uniqueUserIdentifier), otpUserCachedInfo)
-
 }
 
 
