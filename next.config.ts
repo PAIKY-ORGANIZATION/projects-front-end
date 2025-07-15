@@ -1,5 +1,5 @@
 import '@/bootstrap-env';
-import { connectToRedis } from '@/lib/redis-client';
+import { connectToRedis } from '@/lib/redis/redis-client';
 
 connectToRedis();
 

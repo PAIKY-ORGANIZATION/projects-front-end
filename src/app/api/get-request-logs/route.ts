@@ -1,4 +1,4 @@
-import { s3AppLogsPath } from "@/lib/variables";
+import { s3AppLogsPath } from "@/lib/variables-and-redis-keys";
 import { NextResponse } from "next/server"
 import fs from 'node:fs'
 

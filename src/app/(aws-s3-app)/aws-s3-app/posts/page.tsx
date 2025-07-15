@@ -1,6 +1,6 @@
 import { getAllPosts } from "@/actions/s3-app/get-all-posts";
 import PostsPage from "@/components/aws-s3-app/PostShow";
-import { s3AppLogsPath } from "@/lib/variables";
+import { s3AppLogsPath } from "@/lib/variables-and-redis-keys";
 import { requestLog } from "@/utils/log-visit";
 
 

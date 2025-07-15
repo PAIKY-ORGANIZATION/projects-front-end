@@ -19,3 +19,15 @@ type ImageMetadata =  {
     uniqueuseridentifier: string, //! AWS sets metadata all lower case that is why I set it like this.
     description: string
 }
+
+
+
+
+
+
+type OtpUserCachedInfo = {
+    contactType: 'phone' | 'email'
+    contact: string
+    username: string
+    password: string
+}

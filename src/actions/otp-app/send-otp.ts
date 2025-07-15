@@ -1,6 +1,9 @@
 "use server"
 
 import { sendEmail, sendSMS } from '@/lib/brevo/brevo-services'
+import { redisClient } from '@/lib/redis/redis-client'
+import { otpUserHashKey } from '@/lib/variables-and-redis-keys'
+import { getOrSetUniqueUserIdentifier } from '@/utils/get-or-set-unique-user-identifier'
 import {z} from 'zod'
 
 
@@ -24,6 +27,8 @@ export const sendOTP = async({contact, username, password}: Params): Promise<{su
 
         communicationMethod === 'phone' ? await sendSMS(contact) : await sendEmail(contact)
         
+        await saveHashToRedis(communicationMethod, {contact, username,  password})
+
         return { success: true, message: 'Success' }
         
     }catch(e){
@@ -49,6 +54,25 @@ const getCommunicationMethod = (contact: string): 'phone' | 'email' | false =>{
     }
 
     return isPhone ? 'phone' : 'email'
+}
+
+//prettier-ignore
+const saveHashToRedis = async(contactType: 'phone' | 'email', {contact, username, password}: Params)=>{
+
+    const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
+
+
+
+
+    const otpUserCachedInfo: OtpUserCachedInfo =  {
+        contactType,
+        contact,
+        username,
+        password
+    }
+
+    await redisClient.hSet(otpUserHashKey(uniqueUserIdentifier), otpUserCachedInfo)
+
 }
 
 

@@ -4,7 +4,7 @@ import { s3Client } from "@/lib/s3-client"
 import { PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { randomUUID } from "crypto"
-import { runRateLimiterCheck } from "@/lib/run-rate-limiter-check"
+import { runRateLimiterCheck } from "@/lib/redis/run-rate-limiter-check"
 import { getOrSetUniqueUserIdentifier } from "@/utils/get-or-set-unique-user-identifier"
 
 
