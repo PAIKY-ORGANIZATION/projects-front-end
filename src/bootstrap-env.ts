@@ -16,6 +16,7 @@ const requiredVars = [
     "AWS_SECRET_ACCESS_KEY",
     "REDIS_HOST",
     "REDIS_PORT",
+    "BREVO_API_KEY"
 ];
 
 requiredVars.forEach((varName) => {
