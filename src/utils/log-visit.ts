@@ -12,6 +12,7 @@ export const requestLog = async({filePath, logInfo}: {filePath: string, logInfo:
         console.log('test 2');
         
 
+        
         const headerStore = await headers()
         const ip = headerStore.get('ip') || ''
     
