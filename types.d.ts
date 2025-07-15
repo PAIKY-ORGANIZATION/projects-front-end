@@ -26,8 +26,6 @@ type ImageMetadata =  {
 
 
 type OtpUserCachedInfo = {
-    contactType: 'phone' | 'email'
     contact: string
     username: string
-    password: string
 }

@@ -4,8 +4,10 @@ import { s3Client } from "@/lib/s3-client"
 import { PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { randomUUID } from "crypto"
-import { runRateLimiterCheck } from "@/lib/redis/run-rate-limiter-check"
 import { getOrSetUniqueUserIdentifier } from "@/utils/get-or-set-unique-user-identifier"
+import { isRateLimited } from "redis-rate-limiter-express"
+import { redisClient } from "@/lib/redis/redis-client"
+import { RedisClientType } from "redis"
 
 
 type Params = {
@@ -17,13 +19,18 @@ type Params = {
 export const getSignerURL = async({type, size, description}: Params)=>{
 
     try{
-        //* Look for a rate limit
-        const isLimited = await runRateLimiterCheck()
+        const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
+
+        //* Look for a rate limit (Only 2 requests in 20 seconds)
+        const isLimited = await isRateLimited(redisClient as RedisClientType, {
+            requestLimit: 2,
+            windowSizeSecs: 20,
+            uniqueUserIdentifier,
+        })
 
         if(isLimited){ return {message: 'Too many requests, please try again in a moment', success: false}}
 
         //* Create a signed URL from AWS
-        const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
 
         const command = new PutObjectCommand({
             Bucket: process.env.AWS_BUCKET_NAME!,

@@ -19,4 +19,4 @@ const connectToRedis = async()=>{
 }
 
 
-connectToRedis()
+await connectToRedis()

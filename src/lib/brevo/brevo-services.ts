@@ -1,7 +1,7 @@
 import { SendSmtpEmail, SendTransacSms } from "@getbrevo/brevo"
 import { brevoEmailApiInstance, brevoSmsApiInstance } from "./brevo-instances"
 
-export const sendSMS = async(phoneNumber: string)=>{
+export const sendOtpSMS = async(phoneNumber: string)=>{
     // z.string().regex(/^\+[1-9]\d{7,14}$/, 'Please enter a valid phone phoneNumber').parse(number)
     const sms = new SendTransacSms
     sms.sender = 'OTP'
@@ -12,7 +12,7 @@ export const sendSMS = async(phoneNumber: string)=>{
 }
 
 
-export const sendEmail = async(email: string)=>{
+export const sendOtpEmail = async(email: string)=>{
     // z.string().email('Please enter a valid email').parse(email)
     const smtpEmail = new SendSmtpEmail()   
     smtpEmail.subject = 'Your OTP verification code'

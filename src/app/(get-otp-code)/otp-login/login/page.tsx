@@ -1,13 +1,15 @@
 "use client"
 
-import { sendOTP } from '@/actions/otp-app/send-otp';
+import { sendOtp } from '@/actions/otp-app/send-otp';
 // LoginFormWithInfo.tsx
 import React from 'react';
 import toast from 'react-hot-toast';
-
+import {useRouter} from 'next/navigation'
 
 //prettier-ignore
 export default function LoginFormWithInfo() {
+
+    const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
@@ -27,10 +29,13 @@ export default function LoginFormWithInfo() {
             return
         }
 
-        const result = await sendOTP({contact, username, password})    
+        const result = await sendOtp({contact, username, password})    
         if(!result.success){
             toast.error(result.message)
         } 
+
+        router.push('/otp-login/verify?contact=' + encodeURIComponent(contact))
+
     }
 
 
@@ -57,22 +62,22 @@ export default function LoginFormWithInfo() {
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Username </label>
 							<input type="text" placeholder="your_username" name="username" value="test"
-							className="w-full text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
+							className="w-full text-black px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Email or Phone</label>
 							<input type="text" name="contact" placeholder="you@example.com or +14155552671" 
-                            className="w-full text-black px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
+                            className="w-full text-black px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1"> Password </label>
 							<input type="password" name="password" placeholder="••••••••" value="11111111"
-                            className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"/>
+                            className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"/>
 						</div>
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-1" > Confirm Password </label>
 							<input type="password" value="11111111"
-							className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"
+							className="w-full px-4 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black"
                             placeholder="••••••••" name="confirmPassword"/>
 						</div>
 						<button type="submit" className="w-full py-2 mt-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
