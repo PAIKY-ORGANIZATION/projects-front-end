@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { resendOtp } from '@/actions/otp-app/send-otp';
+import toast from 'react-hot-toast';
+import { resendOtp } from '@/actions/otp-app/resend-opt';
 
 // prettier-ignore
 export default function OTPVerificationForm() {
@@ -12,9 +13,6 @@ export default function OTPVerificationForm() {
 	//* Getting the email from the url
 	const searchParams = useSearchParams()
 	const contact = searchParams.get('contact')
-
-	console.log({contact});
-	
 
 	const handleChange = (index: number, value: string) => {
 		if (!/^\d?$/.test(value)) return
@@ -29,7 +27,13 @@ export default function OTPVerificationForm() {
 	}
 
 	const handleResend = async () => {
-		await resendOtp()
+		const result = await resendOtp()
+		if (!result.success) {
+			toast.error(result.message)
+			return
+		}
+
+		toast.success(result.message)
 	}
 
 	return (

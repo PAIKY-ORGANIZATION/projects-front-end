@@ -43,7 +43,7 @@ export const sendOtp = async({contact, username, password}: Params): Promise<{su
         
         await saveHashToRedis({contact, username,  password})
 
-        return { success: true, message: 'Success' }
+        return { success: true, message: 'Code sent successfully' }
         
     }catch(e){
 
@@ -92,22 +92,6 @@ const saveHashToRedis = async( {contact, username, }: Params)=>{
 
 
 
-export const resendOtp = async(): Promise<{success: boolean, message: string}>=>{
-    try{
-        
-        const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
-        const cachedOtpUserInfo = await redisClient.hGetAll(otpUserHashKey(uniqueUserIdentifier)) as OtpUserCachedInfo | undefined 
-        
-        if(!cachedOtpUserInfo){ return {success: false, message: 'Not previously logged in'} }
-    
-        const { contact, username} = cachedOtpUserInfo
-        
-        return await sendOtp({contact, username: username, password: '12345678'})
-        
-    }catch(e){
-        return {success: false, message: 'Something went wrong'}
-    }
-}
 
 
 

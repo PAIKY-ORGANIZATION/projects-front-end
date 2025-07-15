@@ -32,6 +32,7 @@ export default function LoginFormWithInfo() {
         const result = await sendOtp({contact, username, password})    
         if(!result.success){
             toast.error(result.message)
+            return  
         } 
 
         router.push('/otp-login/verify?contact=' + encodeURIComponent(contact))
