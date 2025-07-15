@@ -33,7 +33,9 @@ export default function LoginFormWithInfo() {
         if(!result.success){
             toast.error(result.message)
             return  
-        } 
+        }else{
+            toast.success(result.message)
+        }
 
         router.push('/otp-login/verify?contact=' + encodeURIComponent(contact))
 

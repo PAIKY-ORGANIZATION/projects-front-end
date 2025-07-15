@@ -5,10 +5,11 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { resendOtp } from '@/actions/otp-app/resend-opt';
+import { verifyOtp } from '@/actions/otp-app/verify-otp';
 
 // prettier-ignore
 export default function OTPVerificationForm() {
-	const [otp, setOtp] = useState(Array(6).fill(''))
+	const [otp, setOtp] = useState(['', '', '', '', '', ''])
 
 	//* Getting the email from the url
 	const searchParams = useSearchParams()
@@ -32,8 +33,17 @@ export default function OTPVerificationForm() {
 			toast.error(result.message)
 			return
 		}
-
 		toast.success(result.message)
+	}
+
+	const handleVerify = async()=>{
+		const result = await verifyOtp(otp.join(''))
+		if(!result.success){
+			toast.error(result.message)
+			return
+		}
+		toast.success(result.message)
+
 	}
 
 	return (
@@ -50,16 +60,18 @@ export default function OTPVerificationForm() {
 					</Link>
 				</div>
 
-				<form className="space-y-6">
+				<div className="space-y-6">
 					<div className="flex justify-center gap-2">
 						{otp.map((digit, index) => (
 							<input key={index} id={`otp-${index}`} type="text" inputMode="numeric" maxLength={1}
-								className="w-8 h-10 text-center border border-gray-400 rounded-md text-black text-xl focus:outline-none focus:ring-2 focus:ring-blue-500" value={digit} onChange={(e) => handleChange(index, e.target.value)}
+								className="w-8 h-10 text-center border border-gray-400 rounded-md text-black text-xl focus:outline-none focus:ring-2 focus:ring-blue-500" value={digit}
+								onChange={(e) => handleChange(index, e.target.value)}
+								onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
 							/>
 						))}
 					</div>
 
-					<button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+					<button className="w-full py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition" onClick={handleVerify}>
 						Verify Code
 					</button>
 
@@ -68,7 +80,7 @@ export default function OTPVerificationForm() {
 							Didn't receive the code? <span className="underline hover:cursor-pointer" onClick={handleResend}>Resend</span> 
 						</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	)

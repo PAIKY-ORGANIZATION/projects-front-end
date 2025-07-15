@@ -28,4 +28,5 @@ type ImageMetadata =  {
 type OtpUserCachedInfo = {
     contact: string
     username: string
+    sixDigitsCode?: number | string //*   For some reason, Redis gives you back a string even though you saved a number.
 }

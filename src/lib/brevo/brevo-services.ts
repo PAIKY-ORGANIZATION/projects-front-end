@@ -1,24 +1,24 @@
 import { SendSmtpEmail, SendTransacSms } from "@getbrevo/brevo"
 import { brevoEmailApiInstance, brevoSmsApiInstance } from "./brevo-instances"
 
-export const sendOtpSMS = async(phoneNumber: string)=>{
+export const sendOtpSMS = async(phoneNumber: string, sixDigitsCode: number)=>{
     // z.string().regex(/^\+[1-9]\d{7,14}$/, 'Please enter a valid phone phoneNumber').parse(number)
     const sms = new SendTransacSms
     sms.sender = 'OTP'
     sms.recipient =  phoneNumber
-    sms.content = 'Your OTP is 1234'
+    sms.content = 'Your OTP is ' + sixDigitsCode
     sms.organisationPrefix = 'OTP-VERIFICATION'
     await brevoSmsApiInstance.sendTransacSms(sms)
 }
 
 
-export const sendOtpEmail = async(email: string)=>{
+export const sendOtpEmail = async(email: string, sixDigitsCode: number)=>{
     // z.string().email('Please enter a valid email').parse(email)
     const smtpEmail = new SendSmtpEmail()   
     smtpEmail.subject = 'Your OTP verification code'
     smtpEmail.to = [{email}]
     smtpEmail.sender = {email: 'miguel.mendez@miguel-mendez.click'}
-    smtpEmail.htmlContent = _getEmailHtmlContent(1234)
+    smtpEmail.htmlContent = _getEmailHtmlContent(sixDigitsCode)
     await brevoEmailApiInstance.sendTransacEmail(smtpEmail)
 }
 

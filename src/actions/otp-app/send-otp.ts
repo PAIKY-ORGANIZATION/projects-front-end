@@ -39,9 +39,11 @@ export const sendOtp = async({contact, username, password}: Params): Promise<{su
         const communicationMethod = getCommunicationMethod(contact)
         if(!communicationMethod) return { success: false, message: 'Please enter a valid phone number or email' }
 
-        communicationMethod === 'phone' ? await sendOtpSMS(contact) : await sendOtpEmail(contact)
+        const sixDigitsCode = Math.floor(100000 + Math.random() * 900000);
+
+        communicationMethod === 'phone' ? await sendOtpSMS(contact, sixDigitsCode) : await sendOtpEmail(contact, sixDigitsCode)
         
-        await saveHashToRedis({contact, username,  password})
+        await saveHashToRedis(contact, username, sixDigitsCode)
 
         return { success: true, message: 'Code sent successfully' }
         
@@ -74,14 +76,17 @@ const getCommunicationMethod = (contact: string): 'phone' | 'email' | false =>{
 
 
 //prettier-ignore
-const saveHashToRedis = async( {contact, username, }: Params)=>{
+const saveHashToRedis = async(contact: string, username: string, sixDigitsCode?: number)=>{
+
+
 
     const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
 
 
     const otpUserCachedInfo: OtpUserCachedInfo =  {
-        contact,
-        username,
+        contact, //* Saved only IN CASE need to resend code
+        username, //* Only saved as session data
+        sixDigitsCode //* Saved for verification
     }
 
     await redisClient.hSet(otpUserHashKey(uniqueUserIdentifier), otpUserCachedInfo)

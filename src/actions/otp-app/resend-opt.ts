@@ -9,7 +9,7 @@ export const resendOtp = async(): Promise<{success: boolean, message: string}>=>
     try{
         
         const uniqueUserIdentifier = await getOrSetUniqueUserIdentifier()
-        const cachedOtpUserInfo = await redisClient.hGetAll(otpUserHashKey(uniqueUserIdentifier)) as OtpUserCachedInfo | undefined 
+        const cachedOtpUserInfo = await redisClient.hGetAll(otpUserHashKey(uniqueUserIdentifier)) as unknown as OtpUserCachedInfo | undefined 
         
         if(!cachedOtpUserInfo){ return {success: false, message: 'Not previously logged in'} }
     
