@@ -57,7 +57,7 @@ export default function LoginFormWithInfo() {
                         You'll be asked to enter your contact information, and a code will be sent for verification.
                     </p>
 
-					<p className="text-sm text-red-500 font-bold"> Hello, Brevo, this is the app I have been having issues with. Just verifying this is my  app for you  </p>
+
 				</div>
 
 				{/* Form Section */}
