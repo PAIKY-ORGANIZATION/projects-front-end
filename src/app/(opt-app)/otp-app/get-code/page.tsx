@@ -37,7 +37,7 @@ export default function LoginFormWithInfo() {
             toast.success(result.message)
         }
 
-        router.push('/otp-login/verify?contact=' + encodeURIComponent(contact))
+        router.push('/otp-app/verify?contact=' + encodeURIComponent(contact))
 
     }
 
@@ -56,6 +56,8 @@ export default function LoginFormWithInfo() {
                     <p className="text-sm text-blue-900">
                         You'll be asked to enter your contact information, and a code will be sent for verification.
                     </p>
+
+					<p className="text-sm text-red-500 font-bold"> Hello, Brevo, this is the app I have been having issues with. Just verifying this is my  app for you  </p>
 				</div>
 
 				{/* Form Section */}

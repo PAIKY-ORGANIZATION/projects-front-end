@@ -48,7 +48,7 @@ export default function OTPVerificationForm() {
 			return
 		}
 		toast.success(result.message)
-		router.push('/otp-login/success')
+		router.push('/otp-app/success')
 
 	}
 
@@ -61,7 +61,7 @@ export default function OTPVerificationForm() {
 				<div className="text-center text-gray-800 font-medium mb-4"> {contact} </div>
 
 				<div className="text-center mb-6">
-					<Link href={'/otp-login/login'} className="text-sm text-blue-600 hover:underline hover:cursor-pointer">
+					<Link href={'/otp-app/get-code'} className="text-sm text-blue-600 hover:underline hover:cursor-pointer">
 						Change contact info
 					</Link>
 				</div>

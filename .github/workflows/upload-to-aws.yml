@@ -44,6 +44,7 @@ jobs:
             echo "AWS_BUCKET_NAME=${{secrets.AWS_BUCKET_NAME}}" >> ./config/shared.env #$ Same here
             echo "AWS_BUCKET_NAME=${{secrets.AWS_BUCKET_NAME}}" >> ./config/shared.env #$ Same here
             echo "BREVO_API_KEY=${{secrets.BREVO_API_KEY}}" >> ./config/shared.env
+            
             sudo docker compose down 
             #* PICK ONE, READ README.md
             # sudo docker compose -f docker-compose.yml -f docker-compose-full.yml  up --build -d 

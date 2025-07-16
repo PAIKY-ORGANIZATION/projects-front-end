@@ -10,7 +10,7 @@ export default function SuccessPage() {
 				<p className="text-gray-700 mb-6">
 					Your code has been verified successfully. You can now proceed or try the process again.
 				</p>
-				<Link href="/otp-login/login" className="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">
+				<Link href="/otp-app/get-code" className="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">
 					Try Again
 				</Link>
 			</div>
