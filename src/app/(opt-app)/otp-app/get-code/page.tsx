@@ -86,7 +86,7 @@ export default function LoginFormWithInfo() {
                             placeholder="••••••••" name="confirmPassword"/>
 						</div>
 						<button type="submit" className="w-full py-2 mt-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
-							Recieve OTP
+							Receive OTP code
 						</button>
 					</form>
 				</div>
