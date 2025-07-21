@@ -1,5 +1,3 @@
-'use client';
-
 import OTPVerificationForm from '@/components/otp-code/verify-page';
 import { otpAppLogsPath } from '@/lib/variables-and-redis-keys';
 import { logAction } from '@/utils/action-log';
