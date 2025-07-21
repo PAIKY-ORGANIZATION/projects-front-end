@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { logRequest } from "req-logger-express"
 
-export const requestLog = async({filePath, logInfo}: {filePath: string, logInfo: string})=>{
+export const logAction = async({filePath, action}: {filePath: string, action: string})=>{
 
     
 
@@ -15,7 +15,8 @@ export const requestLog = async({filePath, logInfo}: {filePath: string, logInfo:
         await logRequest({
             fileName: filePath, //! this is actually the file path.
             ip,
-            logInfo: logInfo
+            action: action,
+            appName: 'projects-frontend'
         })
     }
 
