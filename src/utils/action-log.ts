@@ -6,12 +6,13 @@ export const logAction = async({filePath, action}: {filePath: string, action: st
     
 
     //* If we are in development, avoid writing to the file system because it triggers a lot of hot reloads 
-    if(process.env.NODE_ENV === 'production'){
-
+    if(process.env.NODE_ENV === 'production'){ 
         
         const headerStore = await headers()
         const ip = headerStore.get('ip') || ''
-    
+        
+    	console.log('upload page');
+
         await logRequest({
             fileName: filePath, //! this is actually the file path.
             ip,

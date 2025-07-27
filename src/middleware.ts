@@ -9,9 +9,6 @@ export const middleware = async (req: NextRequest)=>{
         //$ 2. Logging
     const unparsedIp =   req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip');
 
-    console.log({unparsedIp});
-    
-
     const ip = unparsedIp?.split(',')[0] || '';
     
 

@@ -3,7 +3,7 @@ import { brevoEmailApiInstance, brevoSmsApiInstance } from "./brevo-instances"
 
 export const sendOtpSMS = async(phoneNumber: string, sixDigitsCode: number)=>{
     // z.string().regex(/^\+[1-9]\d{7,14}$/, 'Please enter a valid phone phoneNumber').parse(number)
-    const sms = new SendTransacSms
+    const sms = new SendTransacSms()
     sms.sender = 'OTP'
     sms.recipient =  phoneNumber
     sms.content = 'Your OTP is ' + sixDigitsCode
