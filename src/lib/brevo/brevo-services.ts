@@ -23,6 +23,7 @@ export const sendOtpEmail = async(email: string, sixDigitsCode: number)=>{
 }
 
 
+
 const _getEmailHtmlContent = (otpCode: number)=>{
     return `
       <div style="font-family: sans-serif; max-width: 480px; margin: auto; padding: 20px; border: 1px solid #e2e2e2; border-radius: 8px;">
